@@ -16,6 +16,10 @@ public interface StaffDao {
     void save(StaffBean sb);
     
     StaffBean findByMemberIdAndPassword(Integer staffId, String password);	
+    
+    List<? super Integer> getCountsAndPage(int pageSize, String hql);
+    
+	public List<StaffBean> findStaffByPage(int currentpage, int pagesize, String hql);
 
 
 }

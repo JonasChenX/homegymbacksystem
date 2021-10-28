@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import dao.StaffDao;
 import util.HibernateUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -58,6 +59,43 @@ public class StaffDaoImpl implements StaffDao {
 			sb = null;
 		}
 		return sb;
+	}
+
+	@Override
+	public List<? super Integer> getCountsAndPage(int pageSize, String hql) {
+		
+		int totalPages = 0;
+		long count = 0; 
+	    List<? super Integer> pageInfo;
+	    String countHql = "SELECT count(*) " + hql;
+		  
+	    Session session = factory.getCurrentSession();
+	
+	    List<Long> list = session.createQuery(countHql, Long.class).getResultList();
+		  
+	    System.out.println(list);
+		  
+	    if (list.size() > 0) {
+	    	count = list.get(0);
+		}
+		  
+	    totalPages = (int) (Math.ceil(count / (double) pageSize));
+		  
+	    pageInfo = Arrays.asList(count,totalPages);
+		  
+	    return pageInfo;
+		
+	}
+
+	@Override
+	public List<StaffBean> findStaffByPage(int currentPage, int pageSize, String hql) {
+		Session session = factory.getCurrentSession();
+		List<StaffBean> list = session.createQuery(hql, StaffBean.class).setFirstResult((currentPage - 1) * pageSize)
+				.setMaxResults(pageSize).getResultList();
+		
+		return list;
+		
+		
 	}
 	
 	

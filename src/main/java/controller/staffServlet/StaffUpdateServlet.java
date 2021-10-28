@@ -1,7 +1,8 @@
 package controller.staffServlet;
 
 import java.io.IOException;
-//import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.StaffBean;
 import service.StaffService;
@@ -20,7 +22,7 @@ public class StaffUpdateServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-//		HttpSession hsession = request.getSession();
+		HttpSession hsession = request.getSession();
 //		Map<String,String> errorMsg = new HashMap<>();
 //		request.setAttribute("error", errorMsg);
 		String modify = request.getParameter("finalDecision"); //讀取提示訊息
@@ -60,12 +62,17 @@ public class StaffUpdateServlet extends HttpServlet {
 				Date staffBirthday = null;
 				Date staffCheckInDay = null;
 				
-//				try {
-//					staffBirthday = sdf.parse(strStaffBirthday);
-//					staffCheckInDay = sdf.parse(strStaffCheckInDay);
-//				} catch (ParseException e1) {
-//					e1.printStackTrace();
-//				}
+				String  bd= request.getParameter("staffBirthday");	//暫存staffBirthday
+			    String cid = request.getParameter("staffCheckInDay");//暫存staffCheckInDay
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
+					try {
+						staffBirthday=sdf.parse(bd);
+						staffCheckInDay=sdf.parse(cid);
+					} catch (Exception e) {		
+						e.printStackTrace();
+					}
+				
 				
 				String staffStatus = request.getParameter("staffStatus");
 				//檢查輸入的資料
@@ -82,12 +89,12 @@ public class StaffUpdateServlet extends HttpServlet {
 //					return;
 //			}
 			StaffBean sb = new StaffBean(staffId,staffName,staffPassword,staffPosition,staffPhone,staffBirthday,staffCheckInDay,staffStatus);
+			try {
+				hsession.setAttribute("modify", "修改成功");
 			staffService.update(sb);
-//			try {
-//				hsession.setAttribute("modify", "修改成功");
-//			}catch(Exception e){
-//				hsession.setAttribute("modify", "修改時發生異常");
-//			}
+			}catch(Exception e){
+				hsession.setAttribute("modify", "修改時發生異常");
+			}
 			String url = request.getContextPath()+"/Staff/queryStaff";
 //			String url = request.getContextPath()+"/BackendSystem/backendAdminister.jsp";
 			String newurl = response.encodeRedirectURL(url);

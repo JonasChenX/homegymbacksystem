@@ -2,10 +2,11 @@ package controller.staffServlet;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -60,6 +61,17 @@ public class SaveStaffServlet extends HttpServlet {
 				}
 			}
 		}
+		
+		String bd = request.getParameter("staffBirthday");	
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+			try {
+				
+				staffBirthday=sdf.parse(bd);
+			} catch (ParseException e) {		
+				e.printStackTrace();
+			}
 		
 		String contextPath = request.getContextPath();
 		StaffService staffService = new StaffServiceImpl();

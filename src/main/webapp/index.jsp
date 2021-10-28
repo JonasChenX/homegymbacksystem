@@ -36,7 +36,7 @@
 	        <div class="container-fluid d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
 	        	<div class="d-flex align-items-center justify-content-center mb-4">
 	                <img style="width: 10%;" class="me-3" src="<c:url value='/BackendSystem/image/logo_white.png'></c:url>" alt="">
-	                <h1 class="text-white">HomeGym</h1>
+	                <h1 class="text-white">HomeGym 後台系統</h1>
             	</div>
 	            <div class="box col-6 p-4 rounded-3">
 	                <div class="mb-3 row align-items-center">

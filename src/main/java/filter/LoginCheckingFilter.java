@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import model.StaffBean;
 
@@ -35,14 +33,14 @@ import model.StaffBean;
 // 方法讀入，放入List型別的實例變數 url 內。
 @WebFilter(
 		urlPatterns = { "/*"},
-		initParams = { 
+		initParams = {
 				@WebInitParam(name = "mustLogin1", value = "/Member/*"),
 				@WebInitParam(name = "mustLogin2", value = "/Course/*"),
 				@WebInitParam(name = "mustLogin3", value = "/Staff/*"),
 		})
 public class LoginCheckingFilter implements Filter {
 	
-	private static Logger log = LoggerFactory.getLogger(LoginCheckingFilter.class);
+//	private static Logger log = LoggerFactory.getLogger(LoginCheckingFilter.class);
 	
 	List<String> url = new ArrayList<String>();
 	String servletPath;
@@ -86,8 +84,7 @@ public class LoginCheckingFilter implements Filter {
 					resp.sendRedirect(resp.encodeRedirectURL(contextPath + "/index.jsp"));
 					return;
 				}
-			} else {   //
-				log.info("不需要登入，直接去執行他要執行的程式");
+			} else { 
 				
 				chain.doFilter(request, response);
 			}
@@ -100,11 +97,21 @@ public class LoginCheckingFilter implements Filter {
 		HttpSession session = req.getSession();
 		
 		StaffBean loginToken = (StaffBean) session.getAttribute("LoginOK");
-		if (loginToken == null) {
+		
+		
+		if (loginToken == null){
 			return false;
-		} else {
+		} else{
+			if(loginToken.getStaffStatus().equals("已離職")) {
+				return false;
+			}
 			return true;
 		}
+//		if (loginToken == null){
+//			return false;
+//		} else{
+//			return true;
+//		}
 	}
 
 	// 如果請求的ServletPath的前導字是以某個必須登入才能使用之資源的路徑，那就必須登入。

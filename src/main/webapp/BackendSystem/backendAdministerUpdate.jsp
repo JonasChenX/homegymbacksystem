@@ -34,8 +34,8 @@
                     
                     <!-- 存放值的地方 -->
                     <input type="hidden" name="staffId"     value="${sb.id}" >
-                    <%-- <input type="hidden" name="staffBirthday"     value="${staffBirthday}" >
-                    <input type="hidden" name="staffCheckInDay"     value="${staffCheckInDay}" > --%>
+                    <input type="hidden" name="staffBirthday"     value="${sb.staffBirthday}" >
+                    <input type="hidden" name="staffCheckInDay"     value="${sb.staffCheckInDay}" >
                     <input type="hidden" name="finalDecision" value="" > 
                     
 
