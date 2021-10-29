@@ -67,11 +67,11 @@ public class LoginServlet extends HttpServlet {
 		StaffService staffService  = new StaffServiceImpl();
 		
 		// 將密碼加密兩次，以便與存放在表格內的密碼比對
-//		String encryptPassword = GlobalService.getMD5Endocing(GlobalService.encryptString(password));
+		String encryptPassword = GlobalService.getMD5Endocing(GlobalService.encryptString(password));
 		
 		StaffBean sb = null;
 		try {
-			sb = staffService.findByMemberIdAndPassword(staffId, password);
+			sb = staffService.findByMemberIdAndPassword(staffId, encryptPassword);
 			
 			if (sb != null) {
 				// OK, 登入成功, 將mb物件放入Session範圍內，識別字串為"LoginOK"

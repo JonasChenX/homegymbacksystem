@@ -79,8 +79,8 @@ public class SaveStaffServlet extends HttpServlet {
 		
 		// 為了配合Hibernate的版本。
 		// 要在此加密
-//		staffPassword = GlobalService.getMD5Endocing(
-//				     GlobalService.encryptString(staffPassword));
+		staffPassword = GlobalService.getMD5Endocing(
+				     GlobalService.encryptString(staffPassword));
 		
 		StaffBean sb = new StaffBean(null,staffName,staffPassword,staffPosition,staffPhone,staffBirthday,ts,staffStatus);
 		staffService.save(sb);

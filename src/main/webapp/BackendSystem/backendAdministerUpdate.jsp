@@ -55,12 +55,13 @@
                           <input class="form-control me-2" name="staffName" id="staffName" type="text" value="${sb.staffName}" aria-label="Search">
                         </div>
                         <!-- 員工密碼 -->
-                        <div class="d-flex align-items-center mb-3">
+                        <!-- <div class="d-flex align-items-center mb-3">
                           <div class="col-auto fw-bold">
                             <label for="staffPassword" class="col-form-label me-3">員工密碼</label>
                           </div>
-                          <input class="form-control me-2" name="staffPassword" id="staffPassword" type="text" value="${sb.staffPassword}" aria-label="Search">
-                        </div>
+                          <input class="form-control me-2" name="staffPassword" id="staffPassword" type="text" value="" aria-label="Search">
+                        </div> -->
+                          <input class="form-control me-2" name="staffPassword" id="staffPassword" type="hidden" value="${sb.staffPassword}" aria-label="Search">
                         <!-- 員工職稱 -->
                         <div class="d-flex align-items-center mb-3">
                           <div class="col-auto fw-bold">

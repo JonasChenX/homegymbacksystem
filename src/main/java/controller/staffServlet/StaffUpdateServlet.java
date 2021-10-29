@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import model.StaffBean;
 import service.StaffService;
 import service.serviceimpl.StaffServiceImpl;
+import util.GlobalService;
 
 @WebServlet("/staff/staffUpdate.do")
 public class StaffUpdateServlet extends HttpServlet {
@@ -54,6 +55,9 @@ public class StaffUpdateServlet extends HttpServlet {
 //				String staffId = request.getParameter("staffId");
 				String staffName = request.getParameter("staffName");
 				String staffPassword = request.getParameter("staffPassword");
+				
+//				String encryptPassword = GlobalService.getMD5Endocing(GlobalService.encryptString(staffPassword));
+				
 				String staffPosition = request.getParameter("staffPosition");
 				String staffPhone = request.getParameter("staffPhone");
 				
