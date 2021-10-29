@@ -20,6 +20,18 @@ public interface StaffDao {
     List<? super Integer> getCountsAndPage(int pageSize, String hql);
     
 	public List<StaffBean> findStaffByPage(int currentpage, int pagesize, String hql);
+	
+	
+	//查詢
+	String getById(String inputId);
+	
+	String getByName(String inputName);
+	
+	String getByPhone(String inputPhone);
+	
+	String getByPosition(String inputPosition);
+	
+	String getSelectHql(String partOfBody, String num);
 
 
 }

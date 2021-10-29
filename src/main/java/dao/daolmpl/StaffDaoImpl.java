@@ -51,7 +51,7 @@ public class StaffDaoImpl implements StaffDao {
 	public StaffBean findByMemberIdAndPassword(Integer staffId, String password) {
 		StaffBean sb = null;
 		Session session = factory.getCurrentSession();
-		String hql = "FROM StaffBean m WHERE m.id = :mid and m.staffPassword = :pswd";
+		String hql = "FROM StaffBean m WHERE m.staffId = :mid and m.staffPassword = :pswd";
 		
 		try {
 			sb = (StaffBean) session.createQuery(hql).setParameter("mid", staffId).setParameter("pswd", password).getSingleResult();
@@ -94,16 +94,64 @@ public class StaffDaoImpl implements StaffDao {
 				.setMaxResults(pageSize).getResultList();
 		
 		return list;
-		
-		
+	}
+
+	@Override
+	public String getById(String inputId) {
+		String hql;
+		String text = "'" + "%" + inputId + "%" + "'";
+		hql = "FROM StaffBean WHERE staffId LIKE " + text ;
+		return hql;
+	}
+
+	@Override
+	public String getByName(String inputName) {
+		String hql;
+		String text = "'" + "%" + inputName + "%" + "'";
+		hql = "FROM StaffBean WHERE staffName LIKE " + text ;
+		return hql;
+	}
+
+	@Override
+	public String getByPhone(String inputPhone) {
+		String hql;
+		String text = "'" + "%" + inputPhone + "%" + "'";
+		hql = "FROM StaffBean WHERE staffPhone LIKE " + text ;
+		return hql;
+	}
+
+	@Override
+	public String getByPosition(String inputPosition) {
+		String hql;
+		String text = "'" + "%" + inputPosition + "%" + "'";
+		hql = "FROM StaffBean WHERE staffPosition LIKE " + text;
+		return hql;
+	}
+
+	@Override
+	public String getSelectHql(String partOfBody, String num) {
+		String selectHql;
+		  String part = "'" + partOfBody + "'";
+		 
+		  if(num.equals("2")) {
+		   
+		   if(partOfBody.equals("0")) {
+		    selectHql = "FROM StaffBean WHERE checked = 1";
+		    
+		   }else {
+		    selectHql = "FROM StaffBean WHERE checked = 1 AND partOfBody = " + part;
+		   }
+		   
+		  }else if(partOfBody.equals("0")){
+		   selectHql = "FROM StaffBean WHERE checked = 1 AND  pass = " + num;
+		  }else {
+		   selectHql = "FROM StaffBean WHERE checked = 1 AND partOfBody = " + part + " AND pass = " + num;
+		   
+		  }
+		  return selectHql;
 	}
 	
 	
-	
-	
-	
-	
-    
     
     
     

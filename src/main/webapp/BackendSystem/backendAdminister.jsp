@@ -35,43 +35,62 @@
 
                 <!-- 查詢列 -->
                   <div class="row row-cols-2 ps-5 pe-5">
-                      <div class="col mb-3">
-                        <div class="d-flex">
-                          <div class="col-auto">
-                            <label for="inputOrderId" class="col-form-label me-2">員工編號</label>
-                          </div>
-                          <input class="form-control me-2" id="inputOrderId" type="text" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
-                        </div>
-                      </div>
-                      <div class="col mb-3">
-                        <div class="d-flex">
-                          <div class="col-auto">
-                            <label for="inputMemberName" class="col-form-label me-2">員工名稱</label>
-                          </div>
-                          <input class="form-control me-2" id="inputMemberName" type="text" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
-                        </div>
-                      </div>
-                      <div class="col mb-3">
-                        <div class="d-flex">
-                          <div class="col-auto">
-                            <label for="inputMemberPhone" class="col-form-label me-2">員工電話</label>
-                          </div>
-                          <input class="form-control me-2" id="inputMemberPhone" type="text" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
-                        </div>
-                      </div>
-                      <div class="col mb-3">
-                        <div class="d-flex">
-                          <div class="col-auto">
-                            <label for="inputOrderTime" class="col-form-label me-2">報到日期</label>
-                          </div>
-                          <input class="form-control me-2" id="inputOrderTime" type="date" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
-                        </div>
-                      </div>
-                  </div>
+						<FORM class="col-6" action="<c:url value='/Staff/SearchStaffId.do?' />"
+							method="GET">
+							<div class="col mb-3">
+								<div class="d-flex">
+									<div class="col-auto">
+										<label for="inputStaffId" class="col-form-label me-2">員工編號</label>
+									</div>
+									<input class="form-control me-2" id="inputStaffId"
+										type="text" placeholder="Search" name="inputId">
+									<button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
+								</div>
+							</div>
+						</FORM>
+						<FORM class="col-6" action="<c:url value='/Staff/SearchName.do?' />"
+							method="GET">
+							<div class="col mb-3">
+								<div class="d-flex">
+									<div class="col-auto">
+										<label for="inputStaffName" class="col-form-label me-2">員工姓名</label>
+									</div>
+									<input class="form-control me-2" id="inputStaffName"
+										type="text" placeholder="Search" name="inputName">
+									<button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
+								</div>
+							</div>
+						</FORM>
+						<FORM class="col-6" action="<c:url value='/Staff/SearchPhone.do?' />"
+							method="GET">
+							<div class="col mb-3">
+								<div class="d-flex">
+									<div class="col-auto">
+										<label for="inputStaffPhone" class="col-form-label me-2">員工電話</label>
+									</div>
+									<input class="form-control me-2" id="inputStaffPhone"
+										type="text" placeholder="Search" name="inputPhone">
+									<button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
+								</div>
+							</div>
+						</FORM>
+						<FORM class="col-6" action="<c:url value='/Staff/SearchPosition.do?' />"
+							method="GET">
+							<div class="col mb-3">
+								<div class="d-flex">
+									<div class="col-auto">
+										<label for="inputStaffPosition" class="col-form-label me-2">員工職稱</label>
+									</div>
+									<select id="inputStaffPosition" class="form-select me-2"  name="inputPosition">
+			                            <option value="新進人員">新進人員</option>
+			                            <option value="主管">主管</option>
+			                            <option value="經理">經理</option>
+			                        </select>  
+									<button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
+								</div>
+							</div>
+						</FORM>
+					</div>
                   <!-- 表格 -->
                   <table class="table table-striped align-middle mt-4 text-center" >
                       <thead>
@@ -89,16 +108,16 @@
                       </thead>
                       <tbody>
                         <!-- 員工項目 -->
-                        <c:forEach var="staff"  items="${staff}" > 
+                        <c:forEach var="staff"  items="${pageBean.staffBean}" > 
 	                       <tr>
-	                         <td>${staff.id}</td>
+	                         <td>${staff.staffId}</td>
 	                         <td>${staff.staffName}</td>
 	                         <td>${staff.staffPosition}</td>
 	                         <td>${staff.staffPhone}</td>
 	                         <td>${staff.staffBirthday}</td>
 	                         <td>${staff.staffCheckInDay}</td>
 	                         <td>${staff.staffStatus}</td>
-	                         <td><a href="<c:url value='/Staff/findStaff?key=${staff.id}' />"  class="btn btn-outline-dark">修改</a></td>
+	                         <td><a href="<c:url value='/Staff/findStaff?key=${staff.staffId}' />"  class="btn btn-outline-dark">修改</a></td>
 	                       </tr>
                         </c:forEach>
                         
@@ -107,23 +126,83 @@
                       </tbody>
                     </table>
                     <!-- 分頁 -->
-                    <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4 mb-4">
-                      <ul class="pagination">
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                          </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </nav>
+                    <nav class="d-flex justify-content-center mt-3 mb-3">
+						<ul class="pagination">
+							<li class="page-item"><c:if
+									test="${pageBean.currentPage > 1}">
+									<c:choose>
+										<c:when
+											test="${!empty param.partOfBody || !empty param.status}">
+											<a class="page-link"
+												href="<c:url value='${servletPath}?status=${param.status}&partOfBody=${param.partOfBody}&pageNo=${pageBean.currentPage-1}' />"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a>
+										</c:when>
+										<c:when test="${!empty param.inputId}">
+											<a class="page-link"
+												href="<c:url value='${servletPath}?inputId=${param.inputId}&pageNo=${pageBean.currentPage-1}' />"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a class="page-link"
+												href="<c:url value='${servletPath}?pageNo=${pageBean.currentPage-1}' />"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a>
+										</c:otherwise>
+									</c:choose>
+
+								</c:if></li>
+							<c:if test="${pageBean.totalPage > 1}">
+								<c:forEach var="page" begin="1" end="${pageBean.totalPage}"
+									step="1">
+									<c:choose>
+										<c:when
+											test="${!empty param.partOfBody || !empty param.status}">
+											<li class="page-item"><a class="page-link"
+												href="<c:url value='${servletPath}?status=${param.status}&partOfBody=${param.partOfBody}&partOfBody=${param.partOfBody}&pageNo=${page}'/>">${page}</a>
+											</li>
+										</c:when>
+										<c:when test="${!empty param.inputId}">
+											<li class="page-item"><a class="page-link"
+												href="<c:url value='${servletPath}?inputId=${param.inputId}&pageNo=${page}'/>">${page}</a>
+											</li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="<c:url value='${servletPath}?pageNo=${page}'/>">${page}</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</c:if>
+
+							<li class="page-item"><c:if
+									test="${pageBean.currentPage != pageBean.totalPage && pageBean.totalPage != 0}">
+									<c:choose>
+										<c:when
+											test="${!empty param.partOfBody || !empty param.status}">
+											<a class="page-link"
+												href="<c:url value='${servletPath}?status=${param.status}&partOfBody=${param.partOfBody}&pageNo=${pageBean.currentPage+1}' />"
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											</a>
+										</c:when>
+										<c:when test="${!empty param.inputValue}">
+											<a class="page-link"
+												href="<c:url value='${servletPath}?inputValue=${param.inputValue}&pageNo=${pageBean.currentPage+1}' />"
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a class="page-link"
+												href="<c:url value='${servletPath}?pageNo=${pageBean.currentPage+1}' />"
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											</a>
+										</c:otherwise>
+									</c:choose>
+								</c:if></li>
+						</ul>
+					</nav>
               </div>
           </div>
       </div>

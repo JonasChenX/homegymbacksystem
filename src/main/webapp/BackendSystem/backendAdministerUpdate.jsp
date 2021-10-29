@@ -33,7 +33,7 @@
                     <div class="d-flex mt-5 justify-content-center align-items-center">
                     
                     <!-- 存放值的地方 -->
-                    <input type="hidden" name="staffId"     value="${sb.id}" >
+                    <input type="hidden" name="staffId"     value="${sb.staffId}" >
                     <input type="hidden" name="staffBirthday"     value="${sb.staffBirthday}" >
                     <input type="hidden" name="staffCheckInDay"     value="${sb.staffCheckInDay}" >
                     <input type="hidden" name="finalDecision" value="" > 
@@ -45,7 +45,7 @@
                           <div class="col-auto fw-bold">
                             <label for="staffId" class="col-form-label me-3">員工編號</label>
                           </div>
-                          <div class="p-0" name="staffId" id="staffId">${sb.id}</div>
+                          <div class="p-0" name="staffId" id="staffId">${sb.staffId}</div>
                         </div>
                         <!-- 員工姓名 -->
                         <div class="d-flex align-items-center mb-3">

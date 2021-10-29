@@ -1,19 +1,17 @@
 package service.serviceimpl;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import dao.StaffDao;
 import dao.daolmpl.StaffDaoImpl;
+import model.PageBean;
 import model.StaffBean;
 import service.StaffService;
 import util.HibernateUtils;
-
-import javax.servlet.annotation.WebServlet;
-import java.util.List;
 
 public class StaffServiceImpl implements StaffService{
     SessionFactory factory;
@@ -115,11 +113,41 @@ public class StaffServiceImpl implements StaffService{
 		}
 		return sb;
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public PageBean findStaffByPage(int currentpage, int pagesize, String hql) {
+		 long count; 
+		  int totalpage;
+		  Session session = factory.getCurrentSession();
+		  PageBean pageBean = new PageBean();
+		  Transaction tx = null;
+		  try {
+		   tx = session.beginTransaction();
+		   // 返回資料庫中的商品總數
+		   count = (long) staffDao.getCountsAndPage(pagesize, hql).get(0);
+		   // 計算總頁數
+		   totalpage = (int) staffDao.getCountsAndPage(pagesize, hql).get(1);
+		   
+		   // 查詢到的當前頁面要顯示的商品
+		   List<StaffBean> course = staffDao.findStaffByPage(currentpage, pagesize, hql);
+
+		   pageBean.setCourseCount(count);
+		   pageBean.setStaffBean(course);
+		   pageBean.setCurrentPage(currentpage);
+		   pageBean.setTotalPage(totalpage);
+
+		   tx.commit();
+
+		  } catch (Exception e) {
+		   if (tx != null) {
+		    tx.rollback();
+		    e.printStackTrace();
+		   }
+		  }
+		  return pageBean;
+		
+	}
+		
 	
 	
 	

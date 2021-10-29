@@ -11,7 +11,7 @@ public class PageBean {
 		private Long courseCount;//商品個數
 		private List<VideoBean> videoBean;//商品物件
 		private List<MemberBean> memberBean;
-		
+		private List<StaffBean> staffBean;
 		public Integer getCurrentPage() {
 			return currentPage;
 		}
@@ -48,5 +48,14 @@ public class PageBean {
 		public void setMemberBean(List<MemberBean> memberBean) {
 			this.memberBean = memberBean;
 		}
+		public List<StaffBean> getStaffBean() {
+			return staffBean;
+		}
+		public void setStaffBean(List<StaffBean> staffBean) {
+			this.staffBean = staffBean;
+		}
+		
+		
+		
 		
 }

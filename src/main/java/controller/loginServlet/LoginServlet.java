@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		//檢查使用者輸入資料
-		if(staffId == null ){
+		if(staffId == 0 ){
 			errorMsgMap.put("AccountEmptyError", "帳號欄必須輸入");
 		}
 		
