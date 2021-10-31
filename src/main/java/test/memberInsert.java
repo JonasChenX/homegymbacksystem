@@ -17,11 +17,14 @@ import org.hibernate.Transaction;
 
 import model.CoachBean;
 import model.MemberBean;
+import model.OrderBean;
 import util.HibernateUtils;
 
 public class memberInsert {
 
 	public static void main(String[] args) {
+		
+		
 
 		List<MemberBean> mbList = new ArrayList<>();
 		MemberBean mb;
@@ -47,10 +50,9 @@ public class memberInsert {
 						mb = new MemberBean();
 						col = row.split(",");
 						mb.setMemberPassword(col[1]);
-						mb.setName(col[2]);
+						mb.setMemberName(col[2]);
 						mb.setEmail(col[3]);
 						mb.setPhone(col[4]);
-						mb.setGender(col[5]);
 						mb.setBirthday(new Date(format.parse(col[6]).getTime()));
 						mb.setRole(col[7]);
 						mb.setRegisterTime(new java.sql.Timestamp(System.currentTimeMillis()));
@@ -78,8 +80,8 @@ public class memberInsert {
 						cb.setMember(memberBean);
 						cb.setChecked(col[1]);
 						cb.setPass(col[2]);
-						cb.setExperience(col[3]);
 						cb.setSkill(col[5]);
+						cb.setExperience(col[3]);
 						cb.setCoachInfo(new SerialClob((col[7]).toCharArray()));
 						cb.setAccount(col[9]);
 						cb.setApplyTime(new java.sql.Timestamp(System.currentTimeMillis()));

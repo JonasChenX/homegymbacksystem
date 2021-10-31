@@ -105,7 +105,7 @@
 		                                <th scope="row ">${entry.name}</th>
 		                                <td>${entry.videoId}</td>
 		                                <td>${entry.partOfBody}</td>
-		                                <td>${entry.coach}</td>
+		                                <%-- <td>${entry.coach}</td> --%>
 		                                <td>${entry.price}</td>
 		                                <td>${entry.time}</td>
 		                                <td>

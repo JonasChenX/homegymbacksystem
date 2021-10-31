@@ -27,7 +27,7 @@
 	  </div>
 	  <div class="list-group rounded-0 p-4">
 	  	<!-- 新人權限 -->
-	    <a href="./OrderBackend.html" class="rounded-3 list-group-item list-group-item-action mb-3 p-4 fs-5 text-center">訂單管理</a>
+	    <a href="<c:url value='/Order/OrdersListPageServlet' />" class="rounded-3 list-group-item list-group-item-action mb-3 p-4 fs-5 text-center">訂單管理</a>
 	    <a href="<c:url value='/Course/checkedCoursePage' />" class="rounded-3 list-group-item list-group-item-action mb-3 p-4 fs-5 text-center">課程管理</a>
 
 

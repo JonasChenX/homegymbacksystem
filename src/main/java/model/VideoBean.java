@@ -1,55 +1,154 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.sql.Clob;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Video")
+@Table(name="course")
 public class VideoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "course_id")
 	private Integer videoId;
+	@Column(name = "course_name")
 	private String name;	//課程名
+	@Column(name = "course_info")
 	private Clob videoInfo;	//課程資訊
+	@Column(name = "category")
 	private String category; //課程類別
+	@Column(name = "part_of_body")
 	private String partOfBody; //不確定會用數字還是字串來設定  //運動部位
-	private Blob videoImage;	//影片圖片
+	@Column(name = "course_image")
+	private String videoImage;	//影片圖片
+	@Column(name = "mime_type")
 	private String mimeType;   // /dmot/src/main/java/_03_listBooks/service/impl/BookServiceImpl.java
+	@Column(name = "upload_time")
 	private Date time;	//上傳時間
+	@Column(name = "price")
 	private Integer price; //Integer or Double 	//課程價格
-	private String coach; //放影片上傳者
+//	@Column(name = "")
+//	private String coach; //放影片上傳者
+	@Column(name = "equipment")
 	private String equipment; //器材
+	@Column(name = "level")
 	private String level; //適合的層級
+	@Column(name = "pass")
 	private Integer pass; //課程是否審核成功
+	@Column(name = "checked")
 	private	Integer checked; //審核狀態（未審核/已審核）
+	@Column(name = "check_time")
 	private Date checktime;
-	public VideoBean(Integer videoId) {
-		this.videoId = videoId;
-	}
-	public VideoBean(Integer videoId, String name) {
-		this.videoId = videoId;
-		this.name = name;
-	}
+	@Column(name = "course_path")
+	private String videoPath;
 	
-	public Date getChecktime() {
-		return checktime;
-	}
-	public void setChecktime(Date checktime) {
-		this.checktime = checktime;
-	}
+	@ManyToOne(cascade =CascadeType.PERSIST)
+	@JoinColumn(name = "coach_id")
+	CoachBean coach;
+	/////////
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "orderItem",
+		joinColumns= {
+				@JoinColumn(name="course_id",referencedColumnName = "course_id")
+		},
+		inverseJoinColumns = {
+				@JoinColumn(name="order_id",referencedColumnName = "order_id")
+		}
+	)
+	private Set<OrderBean> order = new HashSet<>();
+	
+	
+	
+	
+	
+	
+	/////////
+
+//
+//	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "video")
+//	private Set<MemberBean> member = new HashSet<MemberBean>();
+//	
+
+	
+
 	public VideoBean() {
 		super();
 	}
+//
+//	public Set<OrderBean> getOrder() {
+//		return order;
+//	}
+//
+//	public void setOrder(Set<OrderBean> order) {
+//		this.order = order;
+//	}
+
+	public VideoBean(Integer videoId, String name, Clob videoInfo, String category, String partOfBody,
+			String videoImage, String mimeType, Date time, Integer price, String equipment, String level, Integer pass,
+			Integer checked, Date checktime, String videoPath, CoachBean coach, Set<OrderBean> order) {
+		super();
+		this.videoId = videoId;
+		this.name = name;
+		this.videoInfo = videoInfo;
+		this.category = category;
+		this.partOfBody = partOfBody;
+		this.videoImage = videoImage;
+		this.mimeType = mimeType;
+		this.time = time;
+		this.price = price;
+		this.equipment = equipment;
+		this.level = level;
+		this.pass = pass;
+		this.checked = checked;
+		this.checktime = checktime;
+		this.videoPath = videoPath;
+		this.coach = coach;
+//		this.order = order;
+	}
+
+
+
+//
+//	public Set<OrderBean> getOrder() {
+//		return order;
+//	}
+//
+//
+//
+//	public void setOrder(Set<OrderBean> order) {
+//		this.order = order;
+//	}
+
+
+	public CoachBean getCoach() {
+		return coach;
+	}
+
+
+
+	public void setCoach(CoachBean coach) {
+		this.coach = coach;
+	}
+
+
 
 	public Integer getVideoId() {
 		return videoId;
@@ -91,11 +190,11 @@ public class VideoBean implements Serializable {
 		this.partOfBody = partOfBody;
 	}
 
-	public Blob getVideoImage() {
+	public String getVideoImage() {
 		return videoImage;
 	}
 
-	public void setVideoImage(Blob videoImage) {
+	public void setVideoImage(String videoImage) {
 		this.videoImage = videoImage;
 	}
 
@@ -123,14 +222,6 @@ public class VideoBean implements Serializable {
 		this.price = price;
 	}
 
-	public String getCoach() {
-		return coach;
-	}
-
-	public void setCoach(String coach) {
-		this.coach = coach;
-	}
-
 	public String getEquipment() {
 		return equipment;
 	}
@@ -146,27 +237,46 @@ public class VideoBean implements Serializable {
 	public void setLevel(String level) {
 		this.level = level;
 	}
-	
+
 	public Integer getPass() {
 		return pass;
 	}
-	
+
 	public void setPass(Integer pass) {
 		this.pass = pass;
 	}
-	
+
 	public Integer getChecked() {
 		return checked;
 	}
-	
+
 	public void setChecked(Integer checked) {
 		this.checked = checked;
 	}
 
+	public Date getChecktime() {
+		return checktime;
+	}
+
+	public void setChecktime(Date checktime) {
+		this.checktime = checktime;
+	}
+
+	public String getVideoPath() {
+		return videoPath;
+	}
+
+	public void setVideoPath(String videoPath) {
+		this.videoPath = videoPath;
+	}
 
 	
-	
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 	
 	
 

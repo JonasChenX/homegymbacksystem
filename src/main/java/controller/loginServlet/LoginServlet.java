@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
 		
 		StaffBean sb = null;
 		try {
-			sb = staffService.findByMemberIdAndPassword(staffId, encryptPassword);
+			sb = staffService.findByMemberIdAndPassword(staffId, password);
 			
 			if (sb != null) {
 				// OK, 登入成功, 將mb物件放入Session範圍內，識別字串為"LoginOK"

@@ -4,49 +4,82 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Coach")
+@Table(name="coach")
 public class CoachBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "coach_id")
 	private Integer id;
+	@Column(name = "experience")
 	private String experience;
+	@Column(name = "certification")
 	private Blob certification;
-	private String skill;
-	private Blob coachImage;
+	@Column(name = "coach_image")
+	private String coachImage;
+	@Column(name = "coach_info")
 	private Clob coachInfo;
+	@Column(name = "skill")
+	private String skill;
+	@Column(name = "account")
 	private String account;
+	@Column(name = "pass")
 	private String pass; 
+	@Column(name = "checked")
 	private	String checked; 
+	@Column(name = "check_time")
 	private Timestamp checkTime;
+	@Column(name = "apply_time")
 	private Timestamp applyTime;
+	@Column(name = "suspension")
 	private String suspension;
 	
 
 	@OneToOne(mappedBy = "coach")
 	MemberBean member;
 	
-	public CoachBean(Integer id, String experience, Blob certification, String skill, Blob coachImage, Clob coachInfo,
+	@OneToMany(mappedBy = "coach", cascade = { CascadeType.PERSIST })
+	private Set<VideoBean> video = new HashSet<>();
+
+
+	public CoachBean() {
+		super();
+	}
+
+	public Set<VideoBean> getVideo() {
+		return video;
+	}
+
+	public void setVideo(Set<VideoBean> video) {
+		this.video = video;
+	}
+
+	public CoachBean(Integer id, String experience, Blob certification, String coachImage, Clob coachInfo, String skill,
 			String account, String pass, String checked, Timestamp checkTime, Timestamp applyTime, String suspension,
 			MemberBean member) {
 		super();
 		this.id = id;
 		this.experience = experience;
 		this.certification = certification;
-		this.skill = skill;
 		this.coachImage = coachImage;
 		this.coachInfo = coachInfo;
+		this.skill = skill;
 		this.account = account;
 		this.pass = pass;
 		this.checked = checked;
@@ -57,16 +90,12 @@ public class CoachBean implements Serializable {
 	}
 
 
-	public CoachBean() {
-		
-	}
-
 
 	public Integer getId() {
 		return id;
 	}
 
-	public void seId(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -86,19 +115,11 @@ public class CoachBean implements Serializable {
 		this.certification = certification;
 	}
 
-	public String getSkill() {
-		return skill;
-	}
-
-	public void setSkill(String skill) {
-		this.skill = skill;
-	}
-
-	public Blob getCoachImage() {
+	public String getCoachImage() {
 		return coachImage;
 	}
 
-	public void setCoachImage(Blob coachImage) {
+	public void setCoachImage(String coachImage) {
 		this.coachImage = coachImage;
 	}
 
@@ -157,7 +178,7 @@ public class CoachBean implements Serializable {
 	public void setSuspension(String suspension) {
 		this.suspension = suspension;
 	}
-	
+
 	public MemberBean getMember() {
 		return member;
 	}
@@ -166,6 +187,19 @@ public class CoachBean implements Serializable {
 		this.member = member;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
+	public String getSkill() {
+		return skill;
+	}
+
+	public void setSkill(String skill) {
+		this.skill = skill;
+	}
+
+	
+	
 	
 }

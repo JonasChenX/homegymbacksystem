@@ -12,6 +12,17 @@ public class PageBean {
 		private List<VideoBean> videoBean;//商品物件
 		private List<MemberBean> memberBean;
 		private List<StaffBean> staffBean;
+		private List<OrderBean> orderBean;
+		
+		
+		
+		
+		public List<OrderBean> getOrderBean() {
+			return orderBean;
+		}
+		public void setOrderBean(List<OrderBean> orderBean) {
+			this.orderBean = orderBean;
+		}
 		public Integer getCurrentPage() {
 			return currentPage;
 		}

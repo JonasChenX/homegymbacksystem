@@ -31,5 +31,6 @@
 		<mapping class="model.VideoBean"></mapping>
 		<mapping class="model.MemberBean"></mapping>
 		<mapping class="model.CoachBean"></mapping>
+		<mapping class="model.OrderBean"></mapping>
 	</session-factory>
 </hibernate-configuration>

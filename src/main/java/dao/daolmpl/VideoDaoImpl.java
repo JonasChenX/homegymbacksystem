@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import dao.VideoDao;
+import model.CoachBean;
+import model.StaffBean;
 import model.VideoBean;
 import ude.RecordNotFoundException;
 import util.HibernateUtils;
@@ -21,6 +23,20 @@ public class VideoDaoImpl implements VideoDao {
 	}
 	
 	
+	
+	
+	@Override
+	public List<VideoBean> findAll() {
+		Session session = factory.getCurrentSession();
+        String hql = "FROM StaffBean";
+        List<VideoBean> beans = session.createQuery(hql, VideoBean.class)
+                .getResultList();
+		return beans;
+	}
+
+
+
+
 	@Override
 	public void save(VideoBean vb) {
 		Session session = factory.getCurrentSession();
@@ -57,6 +73,17 @@ public class VideoDaoImpl implements VideoDao {
 		Integer videopk = Integer.valueOf(videoId);
 		video = (VideoBean) session.get(VideoBean.class, videopk);
 		return video;
+	}
+
+
+	@Override
+	public CoachBean findCoachByFk(int fk) {
+		VideoBean video = null;
+		CoachBean coach = null;
+		Session session = factory.getCurrentSession();
+		video = (VideoBean) session.get(VideoBean.class, fk);
+		coach = session.get(video.getCoach().getClass(), fk);
+		return coach;
 	}
 
 

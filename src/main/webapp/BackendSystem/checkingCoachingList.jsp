@@ -97,7 +97,7 @@
 								<c:when test="${entry.coach.checked == 0}">
 									<tr>
 			                            <td>${entry.memberId}</td>
-			                            <td>${entry.name}</td>
+			                            <td>${entry.memberName}</td>
 			                            <td>${entry.email}</td>
 			                            <td>${entry.coach.skill}</td>
 			                            <td>${entry.coach.applyTime}</td>

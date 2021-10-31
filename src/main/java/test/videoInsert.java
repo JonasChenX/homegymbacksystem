@@ -24,6 +24,7 @@ public class videoInsert {
 
 		List<VideoBean> vbList = new ArrayList<>();
 		VideoBean vb;
+//		CoachBean cb;
 		
 
 		SessionFactory factory = HibernateUtils.getSessionFactory();
@@ -39,6 +40,7 @@ public class videoInsert {
 			while ((row = br.readLine()) != null) {
 				if (times != 0) {
 					vb = new VideoBean();
+//					cb = new CoachBean();
 					col = row.split(",");
 					
 					vb.setName(col[1]);
@@ -51,8 +53,9 @@ public class videoInsert {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					vb.setPrice(Integer.parseInt(col[8]));
-					vb.setCoach(col[9]);
+					vb.setPrice(Integer.parseInt(col[8]));					
+					
+//					vb.setCoach(col[9]);
 					vb.setEquipment(col[10]);
 					vb.setLevel(col[11]);
 					vb.setPass(Integer.parseInt(col[12]));
