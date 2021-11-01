@@ -34,7 +34,7 @@ public class OrderBean implements Serializable {
 	@Column(name = "total_amt")
 	Integer totalAmt;
 	@Column(name = "order_status")
-	Integer orderStatus;
+	String orderStatus;
 	
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -44,7 +44,7 @@ public class OrderBean implements Serializable {
 	
 	////////////////////////
 	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "order")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "order")
 	private Set<VideoBean> course = new HashSet<VideoBean>();
 	
 	
@@ -128,11 +128,11 @@ public class OrderBean implements Serializable {
 		this.totalAmt = totalAmt;
 	}
 
-	public Integer getOrderStatus() {
+	public String getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(Integer orderStatus) {
+	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 	

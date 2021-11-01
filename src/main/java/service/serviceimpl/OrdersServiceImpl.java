@@ -25,23 +25,29 @@ public class OrdersServiceImpl implements OrdersService {
 	VideoDao videoDao;
 	
 	
-	
 	public OrdersServiceImpl() {
 		factory = HibernateUtils.getSessionFactory();
 		ordersDao = new OrdersDaoImpl();
 	}
 	
-	
-	
 
 	@Override
-	public OrderBean findOrderItemByPage(String hql) {
+	public List<OrderBean> findOrderItemByPage(String hql) {
+//		SessionFactory factory = HibernateUtils.getSessionFactory();
+//    	Session session = factory.openSession();
 		Session session = factory.getCurrentSession();
-		OrderBean bean = null;
+		List<OrderBean> bean = null;
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
 			bean = ordersDao.findOrderItemByPage(hql);
+			for(OrderBean ob: bean) {
+				for(VideoBean vb : ob.getCourse()) {
+					System.out.println("=========="+vb);
+					System.out.println("=========="+vb.getName());
+//					bean = vb.getName();
+				}
+			}
 			tx.commit();
 		}catch(Exception e) {
 			if(tx != null) {
@@ -55,11 +61,9 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 
-
-
 	@Override
 	public PageBean findOrdersByPage(int currentPage, int pageSize, String hql) {
-		long count; 
+		  long count; 
 		  int totalpage;
 		  Session session = factory.getCurrentSession();
 		  PageBean pageBean = new PageBean();
@@ -73,6 +77,7 @@ public class OrdersServiceImpl implements OrdersService {
 		   
 		   // 查詢到的當前頁面要顯示的商品
 		   List<OrderBean> order = ordersDao.findOrdersByPage(currentPage, pageSize, hql);
+		   
 
 		   pageBean.setCourseCount(count);
 		   pageBean.setOrderBean(order);

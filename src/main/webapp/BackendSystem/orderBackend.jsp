@@ -40,35 +40,19 @@
                 </nav>
 
                 <!-- 查詢列 -->
-                  <div class="row ps-5 pe-5">
-                      <div class="col-4">
-                        <div class="d-flex">
-                          <div class="col-auto">
-                            <label for="inputOrderId" class="col-form-label me-2">訂單編號</label>
-                          </div>
-                          <input class="form-control me-2" id="inputOrderId" type="text" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <div class="d-flex">
-                          <div class="col-auto">
-                            <label for="inputMemberName" class="col-form-label me-2">會員名稱</label>
-                          </div>
-                          <input class="form-control me-2" id="inputMemberName" type="text" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <div class="d-flex">
-                          <div class="col-auto">
-                            <label for="inputOrderTime" class="col-form-label me-2">訂單時間</label>
-                          </div>
-                          <input class="form-control me-2" id="inputOrderTime" type="date" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
-                        </div>
-                      </div>
-                  </div>
+                <FORM class="col-12" action="<c:url value='/Order/SearchMemberNameAndOrderIdPageServlet' />" method="GET"> 
+	                 <div class="row ps-5 pe-5">
+	                     <div class="col-4">
+	                        <div class="d-flex">
+	                          <div class="col-auto">
+	                            <label for="inputOrderId" class="col-form-label me-2">訂單編號</label>
+	                          </div>
+	                          <input class="form-control me-2" id="inputOrderId" type="text" placeholder="Search" aria-label="Search" name="inputValue">
+	                          <button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
+	                        </div>
+	                     </div>
+	                 </div>
+                 </FORM>
                   <!-- 表格 -->
                   
                   <table class="table table-striped align-middle mt-4 text-center" >
@@ -88,7 +72,16 @@
 	                        <tr>
 	                          <td>${entry.orderId}</td>
 	                          <td>${entry.member.memberName}</td>
-	                          <td>${entry.orderStatus}</td>
+	                          
+	                          <c:choose>
+	                          	<c:when test="${entry.orderStatus =='1'}">
+	                          		<td>交易成功</td>
+	                          	</c:when>
+	                          	<c:when test="${entry.orderStatus =='0'}">
+	                          		<td>交易失敗</td>
+	                          	</c:when>
+	                          </c:choose>
+	                          
 	                          <td>${entry.orderTime}</td>
 	                          <td><div class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#orderContent${entry.orderId}">訂單內容</div></td>
 	                        </tr>
@@ -98,22 +91,74 @@
                       </tbody>
                     </table>
                     <!-- 分頁 -->
-                    <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4 mb-4">
-                      <ul class="pagination">
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                          </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                          </a>
-                        </li>
-                      </ul>
+                    <nav class="d-flex justify-content-center mt-3 mb-3">
+                          <ul class="pagination">
+                           <li class="page-item">
+						        <c:if test="${pageBean.currentPage > 1}">
+						        <c:choose>
+						        	<c:when  test="${!empty param.partOfBody || !empty param.status}">
+							          <a class="page-link" href="<c:url value='${servletPath}?status=${param.status}&partOfBody=${param.partOfBody}&pageNo=${pageBean.currentPage-1}' />" aria-label="Previous"> 
+							          	<span aria-hidden="true">&laquo;</span>
+							          </a>
+						          </c:when>
+						          <c:when  test="${!empty param.inputValue || !empty param.checked}">
+							          <a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&checked=${param.checked}&pageNo=${pageBean.currentPage-1}' />" aria-label="Previous"> 
+							          	<span aria-hidden="true">&laquo;</span>
+							          </a>
+						          </c:when>
+						        	<c:otherwise>
+							          <a class="page-link" href="<c:url value='${servletPath}?pageNo=${pageBean.currentPage-1}' />" aria-label="Previous"> 
+							          	<span aria-hidden="true">&laquo;</span>
+							          </a>
+						          	</c:otherwise>
+						        </c:choose> 
+						        
+						         </c:if>
+						         </li>
+						       	<c:if test="${pageBean.totalPage > 1}">
+						       		<c:forEach var="page"  begin="1" end="${pageBean.totalPage}" step="1" >                  
+						        		<c:choose>
+						        			<c:when  test="${!empty param.partOfBody || !empty param.status}">
+						        				<li class="page-item">
+						        				<a class="page-link" href="<c:url value='${servletPath}?status=${param.status}&partOfBody=${param.partOfBody}&partOfBody=${param.partOfBody}&pageNo=${page}'/>">${page}</a>
+						        				</li>
+						        			</c:when>
+						        			<c:when  test="${!empty param.inputValue}">
+						        				<li class="page-item">
+						        				<a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&checked=${param.checked}&pageNo=${page}'/>">${page}</a>
+						        				</li>
+						        			</c:when>
+						        			<c:otherwise>
+						        				<li class="page-item">
+						        				<a class="page-link" href="<c:url value='${servletPath}?pageNo=${page}'/>">${page}</a>
+						        				</li>
+						        			</c:otherwise>
+						        		</c:choose> 
+						        	</c:forEach>
+						     	</c:if>
+						
+						        <li class="page-item">
+						         	<c:if test="${pageBean.currentPage != pageBean.totalPage && pageBean.totalPage != 0}">
+						         	<c:choose>
+						        		<c:when  test="${!empty param.partOfBody || !empty param.status}">
+						         			<a class="page-link" href="<c:url value='${servletPath}?status=${param.status}&partOfBody=${param.partOfBody}&pageNo=${pageBean.currentPage+1}' />" aria-label="Next">
+						         			<span aria-hidden="true">&raquo;</span>
+						          			</a>
+						          		</c:when>
+						          		<c:when  test="${!empty param.inputValue}">
+						         			<a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&checked=${param.checked}&pageNo=${pageBean.currentPage+1}' />" aria-label="Next">
+						         			<span aria-hidden="true">&raquo;</span>
+						          			</a>
+						          		</c:when>
+						        		<c:otherwise>
+						          			<a class="page-link" href="<c:url value='${servletPath}?pageNo=${pageBean.currentPage+1}' />" aria-label="Next">
+						         			<span aria-hidden="true">&raquo;</span>
+						          			</a>
+						          		</c:otherwise>
+						        	</c:choose> 
+						         	</c:if>
+						        </li>
+                          </ul>
                     </nav>
               </div>
           </div>
@@ -130,25 +175,24 @@
 	          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	        </div>
 	        <div class="modal-body">
+	       
 	          <h5 class="text-center">購買課程內容</h5>
 	          <ul class="list-group">
 	            <!-- 課程購買細項項目 -->
 	            
-	            <c:forEach var="orderitem"  items="${pageBean.orderBean}" >
-	            	<c:forEach>
+	            <c:forEach var="course" items="${page.course}"> 
 		            <li class="list-group-item">
 		              <div class="row align-items-center">
 		                <div class="col-4">
 		                  <img class="w-100" src="https://fakeimg.pl/1280x720/" alt="">
 		                </div>
 		                <div class="col-8">
-		                  <p class="m-0">${orderitem. }</p>
-		                  <p class="m-0 badge bg-primary">${orderitem.orderId}</p>
+		                  <p class="m-0">${course.name}</p>
+		                  <p class="m-0 badge bg-primary">課程編號：${course.videoId}</p>
 		                </div>
 		              </div>
 		            </li>
-		            </c:forEach>
-	            </c:forEach>
+		         </c:forEach>
 	            
 	            
 	          </ul>

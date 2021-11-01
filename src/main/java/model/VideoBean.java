@@ -80,9 +80,6 @@ public class VideoBean implements Serializable {
 	
 	
 	
-	/////////
-
-//
 //	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "video")
 //	private Set<MemberBean> member = new HashSet<MemberBean>();
 //	

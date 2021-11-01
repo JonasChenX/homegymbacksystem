@@ -40,7 +40,7 @@ public class orderInsert {
 					ob.setOrderTime(new java.sql.Timestamp(System.currentTimeMillis()));
 					
 					ob.setTotalAmt(Integer.parseInt(col[2]));
-					ob.setOrderStatus(Integer.parseInt(col[3]));
+					ob.setOrderStatus(col[3]);
 //					int memberId = Integer.parseInt(col[4]);
 //					MemberBean memberBean = session.get(MemberBean.class, memberId);
 //					ob.setMember(memberBean);

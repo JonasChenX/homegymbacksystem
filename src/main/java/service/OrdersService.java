@@ -14,7 +14,7 @@ public interface OrdersService {
 	
 	public MemberBean findMemberByFk(int fk);
 	
-	public OrderBean findOrderItemByPage(String hql);
+	public List<OrderBean> findOrderItemByPage(String hql);
 
 	
 	

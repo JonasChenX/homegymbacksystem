@@ -62,11 +62,16 @@ public class OrdersDaoImpl implements OrdersDao{
 	
 
 	@Override
-	public OrderBean findOrderItemByPage(String hql) {
-		Session session = factory.getCurrentSession();
+	public List<OrderBean> findOrderItemByPage(String hql) {
+		
+		SessionFactory factory = HibernateUtils.getSessionFactory();
+    	
+    	
+    	Session session = factory.openSession();
+//		Session session = factory.getCurrentSession();
 		
 		
-		OrderBean list = session.get(OrderBean.class,Integer.parseInt(hql));		
+		List<OrderBean> list = session.createQuery(hql, OrderBean.class).getResultList();	
 		
 		return list;
 	}
@@ -92,6 +97,18 @@ public class OrdersDaoImpl implements OrdersDao{
 		
 		return member;
 	}
+
+
+	@Override
+	public String getByInputValueHql(String inputValue) {
+		String hql; 
+		String text = "'"+"%"+inputValue+"%"+"'";
+		hql = "FROM OrderBean o WHERE o.orderId LIKE" +text+  " OR  o.member.memberName LIKE" +text ;
+		return hql;
+	}
+	
+	
+	
 	
 	
 	
