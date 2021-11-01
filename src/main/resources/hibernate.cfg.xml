@@ -32,5 +32,6 @@
 		<mapping class="model.MemberBean"></mapping>
 		<mapping class="model.CoachBean"></mapping>
 		<mapping class="model.OrderBean"></mapping>
+		<mapping class="model.VisitorBean"></mapping>
 	</session-factory>
 </hibernate-configuration>

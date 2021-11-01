@@ -13,10 +13,18 @@ public class PageBean {
 		private List<MemberBean> memberBean;
 		private List<StaffBean> staffBean;
 		private List<OrderBean> orderBean;
+		private List<VisitorBean> visitorBean;
 		
 		
 		
 		
+		
+		public List<VisitorBean> getVisitorBean() {
+			return visitorBean;
+		}
+		public void setVisitorBean(List<VisitorBean> visitorBean) {
+			this.visitorBean = visitorBean;
+		}
 		public List<OrderBean> getOrderBean() {
 			return orderBean;
 		}

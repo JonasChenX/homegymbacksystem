@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -158,6 +158,7 @@ public class MemberBean implements Serializable {
 	}
 
 	public Timestamp getRegisterTime() {
+		
 		return registerTime;
 	}
 
@@ -172,14 +173,6 @@ public class MemberBean implements Serializable {
 	public void setCoach(CoachBean coach) {
 		this.coach = coach;
 	}
-//
-//	public OrderBean getOrder() {
-//		return order;
-//	}
-//
-//	public void setOrder(OrderBean order) {
-//		this.order = order;
-//	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

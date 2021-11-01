@@ -29,7 +29,8 @@
 	  	<!-- 新人權限 -->
 	    <a href="<c:url value='/Order/OrdersListPageServlet' />" class="rounded-3 list-group-item list-group-item-action mb-3 p-4 fs-5 text-center">訂單管理</a>
 	    <a href="<c:url value='/Course/checkedCoursePage' />" class="rounded-3 list-group-item list-group-item-action mb-3 p-4 fs-5 text-center">課程管理</a>
-
+		<a href="<c:url value='/Visitor/VisitorProblemServlet' />" class="rounded-3 list-group-item list-group-item-action mb-3 p-4 fs-5 text-center">訪客訊息</a>
+		
 
 	    <!-- 主管權限 -->
 	    <c:if test="${LoginOK.staffPosition == '主管'}">

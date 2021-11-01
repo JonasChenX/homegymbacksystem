@@ -59,7 +59,7 @@ public class VideoBean implements Serializable {
 	@Column(name = "course_path")
 	private String videoPath;
 	
-	@ManyToOne(cascade =CascadeType.PERSIST)
+	@ManyToOne(cascade =CascadeType.ALL)
 	@JoinColumn(name = "coach_id")
 	CoachBean coach;
 	/////////
@@ -79,24 +79,11 @@ public class VideoBean implements Serializable {
 	
 	
 	
-	
-//	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "video")
-//	private Set<MemberBean> member = new HashSet<MemberBean>();
-//	
-
-	
 
 	public VideoBean() {
 		super();
 	}
-//
-//	public Set<OrderBean> getOrder() {
-//		return order;
-//	}
-//
-//	public void setOrder(Set<OrderBean> order) {
-//		this.order = order;
-//	}
+
 
 	public VideoBean(Integer videoId, String name, Clob videoInfo, String category, String partOfBody,
 			String videoImage, String mimeType, Date time, Integer price, String equipment, String level, Integer pass,
@@ -118,21 +105,20 @@ public class VideoBean implements Serializable {
 		this.checktime = checktime;
 		this.videoPath = videoPath;
 		this.coach = coach;
-//		this.order = order;
+		this.order = order;
+	}
+	
+	
+
+
+	public Set<OrderBean> getOrder() {
+		return order;
 	}
 
 
-
-//
-//	public Set<OrderBean> getOrder() {
-//		return order;
-//	}
-//
-//
-//
-//	public void setOrder(Set<OrderBean> order) {
-//		this.order = order;
-//	}
+	public void setOrder(Set<OrderBean> order) {
+		this.order = order;
+	}
 
 
 	public CoachBean getCoach() {

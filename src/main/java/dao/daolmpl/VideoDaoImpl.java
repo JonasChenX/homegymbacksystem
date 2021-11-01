@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 
 import dao.VideoDao;
 import model.CoachBean;
-import model.StaffBean;
 import model.VideoBean;
 import ude.RecordNotFoundException;
 import util.HibernateUtils;

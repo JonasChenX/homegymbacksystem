@@ -37,6 +37,8 @@ import model.StaffBean;
 				@WebInitParam(name = "mustLogin1", value = "/Member/*"),
 				@WebInitParam(name = "mustLogin2", value = "/Course/*"),
 				@WebInitParam(name = "mustLogin3", value = "/Staff/*"),
+				@WebInitParam(name = "mustLogin4", value = "/Order/*"),
+				@WebInitParam(name = "mustLogin5", value = "/Visitor/*"),
 		})
 public class LoginCheckingFilter implements Filter {
 	

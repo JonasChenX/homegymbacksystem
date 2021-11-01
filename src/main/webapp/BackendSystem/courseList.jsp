@@ -114,8 +114,7 @@
 		                                <th scope="row ">${entry.name}</th>
 		                                <td>${entry.videoId}</td>
 		                                <td>${entry.partOfBody}</td>
-		                                <td></td>
-		                                <%-- <td>${entry.coach}</td> --%>
+		                                <td>${entry.coach.member.memberName}</td>
 		                                <td>${entry.price}</td>
 		                                <td>${entry.checktime}</td>
 		                                <td>

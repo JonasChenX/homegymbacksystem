@@ -52,7 +52,7 @@
                                 <ul class="list-unstyled">
                                     <li>
                                         <label class="col-sm-2 col-form-label-lg">申請教練:</label> 
-                                       <%--  <span>${VideoBean.coach}</span> --%>
+                                        <span>${VideoBean.coach.member.memberName}</span>
                                     </li>
                                     <li>
                                         <label class="col-sm-2 col-form-label-lg">申請狀態:</label> 
