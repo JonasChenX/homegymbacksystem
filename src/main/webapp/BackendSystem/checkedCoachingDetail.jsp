@@ -80,7 +80,7 @@
                                 <ul class="list-unstyled ms-4 mb-5">
                                     <li>
                                         <label class="col-form-label-lg">教練簡介</label> 
-                                        <p class="pe-5">${CoachBean.coachInfo}</p>
+                                        <p class="pe-5">${StringCoachInfo}</p>
                                     </li>
                                 </ul>
                             </div>

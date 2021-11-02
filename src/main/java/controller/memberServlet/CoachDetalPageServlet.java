@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.CoachBean;
 import service.MemberService;
 import service.serviceimpl.MemberServiceImpl;
+import util.GlobalService;
 
 
 @WebServlet("/CoachDetalPageServlet")
@@ -26,6 +27,14 @@ public class CoachDetalPageServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		
 		CoachBean coachBean = memberService.findCoachByFk(Integer.parseInt(memberId));
+		
+		
+		try {
+			String  stringCoachInfo = GlobalService.clobToString(coachBean.getCoachInfo());
+			request.setAttribute("StringCoachInfo", stringCoachInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		request.setAttribute("CoachBean",coachBean);
 		

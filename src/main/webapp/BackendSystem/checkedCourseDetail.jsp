@@ -98,7 +98,7 @@
                             </li>
                             <li>
                                 <label class="col-form-label-lg">課程介紹:</label> 
-                                <p class="pe-5">${VideoBean.videoInfo}</p>
+                                <p class="pe-5">${StringVideoInfo}</p>
                             </li>
                         </ul>
 

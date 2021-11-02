@@ -26,16 +26,12 @@ public class OrdersListPageServlet extends HttpServlet {
 		int currentpage = 1;// 默認的當前頁
 		int pagesize = 5;// 每頁顯示的商品數
 		
-//		String hql = "From OrderBean m  WHERE m.member.id != null";
 		String hql = "From OrderBean";
-//		String hql2 = "From VideoBean";
-//		String hql2 = "From OrderBean";
 		
 		String curpage = request.getParameter("pageNo");
 		
 		String servletPath = request.getServletPath();
 		request.setAttribute("servletPath", servletPath);
-//		Set<VideoBean> videoBeans = null;
 
 		// 為當前頁賦值
 		if (!"".equals(curpage) && curpage != null) {
@@ -43,43 +39,9 @@ public class OrdersListPageServlet extends HttpServlet {
 		}
 		
 		OrdersService ordersService = new OrdersServiceImpl();
-//		ClassService classService = new ClassServiceImpl();
 		
 		PageBean pageBean = ordersService.findOrdersByPage(currentpage, pagesize, hql);
-//		List<OrderBean> orderBean = ordersService.findOrderItemByPage(hql);
-//		for(OrderBean ob: orderBean) {
-//			for(VideoBean vb : ob.getCourse()) {
-//				System.out.println("=========="+vb);
-//				System.out.println("=========="+vb.getName());
-//			}
-//			videoBeans = ob.getCourse();
-//		}
-		
-//		Set<VideoBean> videoBean = null;	
-//		for(OrderBean ob: orderBean) {
-//			
-//			videoBean = ob.getCourse();
-//			
-//			for(VideoBean vb : ob.getCourse()) {
-//				System.out.println("=========="+vb);
-//				System.out.println("=========="+vb.getName());
-//			}
-//		}
-		
-//		OrderBean orderItem = ordersService.findOrderItemByPage(hql1);
-//		PageBean pageBean2 = classService.findCourseByPage(currentpage, pagesize, hql2);
-		
-//		List<OrderBean> list  = pageBean.getOrderBean();
-		
-//		for(OrderBean ob: list) {
-//			for(VideoBean vb : ob.getCourse()) {
-//				System.out.println(vb);
-//			}
-//		}
-		
-			
-		
-		
+//		
 		
 		request.setAttribute("pageBean", pageBean);
 		

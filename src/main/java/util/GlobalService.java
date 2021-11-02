@@ -364,6 +364,21 @@ public class GlobalService {
 			}
 		}
 	}
+	
+	public static String clobToString(Clob clob) throws IOException, SQLException {
+		try (Reader reader = clob.getCharacterStream();
+				BufferedReader br = new BufferedReader(reader);
+				) {
+			StringBuffer sb = new StringBuffer();
+			String line = null;
+			while ((line = br.readLine()) != null) {
+					sb.append(line);
+			}
+			return sb.toString();
+		}
+	}
+	
+	
 
 	public static Blob fileToBlob(InputStream is, long size) throws IOException, SQLException {
 		byte[] b = new byte[(int) size];

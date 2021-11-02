@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.VideoBean;
 import service.ClassService;
 import service.serviceimpl.ClassServiceImpl;
+import util.GlobalService;
 
 
 @WebServlet("/Course/CheckingVideoDetail.do")
@@ -30,6 +31,15 @@ public class VideoDetailServlet extends HttpServlet {
 		
 		ClassService classService = new ClassServiceImpl();
 		VideoBean videoBean = classService.findById(id);
+		
+		
+		try {
+			String  stringVideoInfo = GlobalService.clobToString(videoBean.getVideoInfo());
+			request.setAttribute("StringVideoInfo", stringVideoInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	
 		request.setAttribute("VideoBean",videoBean);
 		
