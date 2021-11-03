@@ -1,5 +1,8 @@
 package service.serviceimpl;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -43,6 +46,16 @@ public class MemberServiceImpl implements MemberService {
 		   
 		   // 查詢到的當前頁面要顯示的商品
 		   List<MemberBean> course = memberDao.findMemberByPage(currentPage, pageSize, hql);
+		   
+		   //////
+//		   Iterator iterator = course.iterator();
+//		   MemberBean memberBean = (MemberBean) iterator.next();
+//		   Date date = memberBean.getBirthday();
+//		   SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+//		   String dateBufferString = format.format(date);
+//		   java.util.Date dateBuffer;
+//		   dateBuffer = format.parse(dateBufferString);
+//		   memberBean.setBirthday(dateBuffer);
 
 		   pageBean.setCourseCount(count);
 		   pageBean.setMemberBean(course);

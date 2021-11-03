@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,11 +66,11 @@
                                     </li>
                                     <li>
                                         <label class="col-sm-2 col-form-label-lg">申請時間:</label> 
-                                        <span>${VideoBean.time}</span>
+                                        <span><fmt:formatDate value="${VideoBean.time}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></span>
                                     </li>
                                     <li>
                                         <label class="col-sm-2 col-form-label-lg">審核時間:</label> 
-                                        <span>${VideoBean.checktime}</span>
+                                        <span><fmt:formatDate value="${VideoBean.checktime}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></span>
                                     </li>
                                 </ul>
                             </div>

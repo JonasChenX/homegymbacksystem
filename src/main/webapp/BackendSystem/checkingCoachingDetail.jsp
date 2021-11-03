@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-      <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +62,7 @@
                                     </li>
                                     <li>
                                         <label class="col-auto col-form-label-lg me-3">申請時間</label> 
-                                        <span>${CoachBean.applyTime}</span>
+                                        <span><fmt:formatDate value="${CoachBean.applyTime}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></span>
                                     </li>
                                     <li>
                                         <label class="col-auto col-form-label-lg me-3">審核時間</label> 

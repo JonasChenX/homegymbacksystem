@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -114,8 +116,8 @@
 	                         <td>${staff.staffName}</td>
 	                         <td>${staff.staffPosition}</td>
 	                         <td>${staff.staffPhone}</td>
-	                         <td>${staff.staffBirthday}</td>
-	                         <td>${staff.staffCheckInDay}</td>
+	                         <td><fmt:formatDate value="${staff.staffBirthday}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+	                         <td><fmt:formatDate value="${staff.staffCheckInDay}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
 	                         <td>${staff.staffStatus}</td>
 	                         <td><a href="<c:url value='/Staff/findStaff?key=${staff.staffId}' />"  class="btn btn-outline-dark">修改</a></td>
 	                       </tr>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +84,7 @@
 	                          	</c:when>
 	                          </c:choose>
 	                          
-	                          <td>${entry.orderTime}</td>
+	                          <td><fmt:formatDate value="${entry.orderTime}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
 	                          <td><div class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#orderContent${entry.orderId}">訂單內容</div></td>
 	                        </tr>
                           </c:forEach>

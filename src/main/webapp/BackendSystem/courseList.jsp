@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en"  style="overflow-x:hidden;">
 <head>
@@ -116,7 +118,7 @@
 		                                <td>${entry.partOfBody}</td>
 		                                <td>${entry.coach.member.memberName}</td>
 		                                <td>${entry.price}</td>
-		                                <td>${entry.checktime}</td>
+		                                <td><fmt:formatDate value="${entry.checktime}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
 		                                <td>
 		                                <c:choose>
 										  <c:when test="${entry.pass == 0}">不通過</c:when> 

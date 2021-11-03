@@ -40,7 +40,7 @@ public class VisitorProblem extends HttpServlet {
 		
 		request.setAttribute("pageBean", pageBean);
 		
-		request.getRequestDispatcher("/BackendSystem/visitorProblem.jsp").forward(request, response);//指向去哪/member/memberBackend
+		request.getRequestDispatcher("/BackendSystem/visitorProblem.jsp").forward(request, response);
 		return;
 	}
 

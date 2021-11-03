@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -85,14 +86,14 @@
                           <div class="col-auto fw-bold">
                             <label for="staffBirthday" class="col-form-label me-3">員工生日</label>
                           </div>
-                          <div class="p-0" name="staffBirthday" id="staffBirthday">${sb.staffBirthday}</div>
+                          <div class="p-0" name="staffBirthday" id="staffBirthday"><fmt:formatDate value="${sb.staffBirthday}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></div>
                         </div>
                         <!-- 報到日期 -->
                         <div class="d-flex align-items-center mb-3">
                           <div class="col-auto fw-bold">
                             <label for="staffCheckInDay" class="col-form-label me-3">報到日期</label>
                           </div>
-                          <div class="p-0" name="staffCheckInDay" id="staffCheckInDay">${sb.staffCheckInDay}</div>
+                          <div class="p-0" name="staffCheckInDay" id="staffCheckInDay"><fmt:formatDate value="${sb.staffCheckInDay}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></div>
                         </div>
                         <!-- 員工狀態 -->
                         <div class="d-flex align-items-center mb-3">
