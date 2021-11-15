@@ -37,10 +37,13 @@ public class orderInsert {
 					ob = new OrderBean();
 					col = row.split(",");
 					
-					ob.setOrderTime(new java.sql.Timestamp(System.currentTimeMillis()));
+//					int orderId = Integer.parseInt(col[0]);
+//					ob.setOrderId(orderId);
+					
+//					ob.setOrderTime(new java.sql.Timestamp(System.currentTimeMillis()));
 					
 					ob.setTotalAmt(Integer.parseInt(col[2]));
-					ob.setOrderStatus(col[3]);
+//					ob.setOrderStatus(col[3]);
 //					int memberId = Integer.parseInt(col[4]);
 //					MemberBean memberBean = session.get(MemberBean.class, memberId);
 //					ob.setMember(memberBean);

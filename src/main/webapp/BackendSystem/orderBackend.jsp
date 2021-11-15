@@ -76,10 +76,10 @@
 	                          <td>${entry.member.memberName}</td>
 	                          
 	                          <c:choose>
-	                          	<c:when test="${entry.orderStatus =='1'}">
+	                          	<c:when test="${entry.orderStatus =='付款完成'}">
 	                          		<td>交易成功</td>
 	                          	</c:when>
-	                          	<c:when test="${entry.orderStatus =='0'}">
+	                          	<c:when test="${entry.orderStatus =='交易失敗'}">
 	                          		<td>交易失敗</td>
 	                          	</c:when>
 	                          </c:choose>

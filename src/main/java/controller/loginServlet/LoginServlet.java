@@ -40,15 +40,14 @@ public class LoginServlet extends HttpServlet {
 		
 		//讀取使用者輸入
 		String staffIdStr = request.getParameter("staffId");
-		Integer staffId = Integer.parseInt(staffIdStr);
+//		Integer staffId = Integer.parseInt(staffIdStr.trim());
 		String password = request.getParameter("staffPassword");
-//		String requestURI = (String) session.getAttribute("requestURI"); //原本要做的程式
 		
 		
 		
 		
 		//檢查使用者輸入資料
-		if(staffId == 0 ){
+		if(staffIdStr == null){
 			errorMsgMap.put("AccountEmptyError", "帳號欄必須輸入");
 		}
 		
@@ -71,24 +70,26 @@ public class LoginServlet extends HttpServlet {
 		
 		StaffBean sb = null;
 		try {
-			sb = staffService.findByMemberIdAndPassword(staffId, password);
+			sb = staffService.findByMemberIdAndPassword(Integer.parseInt(staffIdStr.trim()), password);
 			
-			if (sb != null) {
+			if(sb.getStaffStatus().equals("已離職")) {
+				errorMsgMap.put("LoginError", "本員工已離職");
+			} else if(sb != null) {
 				// OK, 登入成功, 將mb物件放入Session範圍內，識別字串為"LoginOK"
 				session.setAttribute("LoginOK", sb);
 				// 建立登出所需的LogoutBean物件
 				LogoutBean logoutBean = new LogoutBean(session);
 				session.setAttribute("logoutBean", logoutBean);
-				String staffIdStr1 = staffId.toString();
-				processCookies(request, response, staffIdStr1, password);
+//				String staffIdStr1 = staffId.toString();
+				processCookies(request, response, staffIdStr, password);
 				
-			} else {
-				// NG, 登入失敗, userid與密碼的組合錯誤，放相關的錯誤訊息到 errorMsgMap 之內
+			}else {
 				errorMsgMap.put("LoginError", "該帳號不存在或密碼錯誤");
 			}
 			
 		} catch (RuntimeException ex) {
-			errorMsgMap.put("LoginError", ex.getMessage());
+//			errorMsgMap.put("LoginError", ex.getMessage());
+			errorMsgMap.put("LoginError", "請輸入正確帳號密碼");
 		}
 		
 		//依照 Business Logic 運算結果來挑選適當的畫面

@@ -2,7 +2,9 @@ package filter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -87,7 +89,6 @@ public class LoginCheckingFilter implements Filter {
 					return;
 				}
 			} else { 
-				
 				chain.doFilter(request, response);
 			}
 		} else {
@@ -100,13 +101,16 @@ public class LoginCheckingFilter implements Filter {
 		
 		StaffBean loginToken = (StaffBean) session.getAttribute("LoginOK");
 		
+		Map<String, String> errorMsgMap = new HashMap<String, String>();
+		req.setAttribute("ErrorMsgKey", errorMsgMap);
 		
 		if (loginToken == null){
 			return false;
 		} else{
-			if(loginToken.getStaffStatus().equals("已離職")) {
-				return false;
-			}
+//			if(loginToken.getStaffStatus().equals("已離職")) {
+//				errorMsgMap.put("LoginError", "本員工已離職");
+//				return false;
+//			}
 			return true;
 		}
 //		if (loginToken == null){

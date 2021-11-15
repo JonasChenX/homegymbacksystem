@@ -34,7 +34,7 @@ public class VideoDetailServlet extends HttpServlet {
 		
 		
 		try {
-			String  stringVideoInfo = GlobalService.clobToString(videoBean.getVideoInfo());
+			String  stringVideoInfo =videoBean.getVideoInfo();
 			request.setAttribute("StringVideoInfo", stringVideoInfo);
 		} catch (Exception e) {
 			e.printStackTrace();

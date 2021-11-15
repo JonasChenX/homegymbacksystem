@@ -82,7 +82,7 @@ public class memberInsert {
 						cb.setPass(col[2]);
 						cb.setSkill(col[5]);
 						cb.setExperience(col[3]);
-						cb.setCoachInfo(new SerialClob((col[7]).toCharArray()));
+						cb.setCoachInfo(col[7]);
 						cb.setAccount(col[9]);
 						cb.setApplyTime(new java.sql.Timestamp(System.currentTimeMillis()));
 						cbList.add(cb);

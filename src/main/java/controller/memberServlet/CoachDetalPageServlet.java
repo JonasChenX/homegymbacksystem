@@ -30,7 +30,7 @@ public class CoachDetalPageServlet extends HttpServlet {
 		
 		
 		try {
-			String  stringCoachInfo = GlobalService.clobToString(coachBean.getCoachInfo());
+			String  stringCoachInfo = coachBean.getCoachInfo();
 			request.setAttribute("StringCoachInfo", stringCoachInfo);
 		} catch (Exception e) {
 			e.printStackTrace();

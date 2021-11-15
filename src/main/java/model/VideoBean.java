@@ -31,7 +31,7 @@ public class VideoBean implements Serializable {
 	@Column(name = "course_name")
 	private String name;	//課程名
 	@Column(name = "course_info")
-	private Clob videoInfo;	//課程資訊
+	private String videoInfo;	//課程資訊
 	@Column(name = "category")
 	private String category; //課程類別
 	@Column(name = "part_of_body")
@@ -65,7 +65,7 @@ public class VideoBean implements Serializable {
 	/////////
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "orderItem",
+	@JoinTable(name = "order_item",
 		joinColumns= {
 				@JoinColumn(name="course_id",referencedColumnName = "course_id")
 		},
@@ -85,29 +85,6 @@ public class VideoBean implements Serializable {
 	}
 
 
-	public VideoBean(Integer videoId, String name, Clob videoInfo, String category, String partOfBody,
-			String videoImage, String mimeType, Date time, Integer price, String equipment, String level, Integer pass,
-			Integer checked, Date checktime, String videoPath, CoachBean coach, Set<OrderBean> order) {
-		super();
-		this.videoId = videoId;
-		this.name = name;
-		this.videoInfo = videoInfo;
-		this.category = category;
-		this.partOfBody = partOfBody;
-		this.videoImage = videoImage;
-		this.mimeType = mimeType;
-		this.time = time;
-		this.price = price;
-		this.equipment = equipment;
-		this.level = level;
-		this.pass = pass;
-		this.checked = checked;
-		this.checktime = checktime;
-		this.videoPath = videoPath;
-		this.coach = coach;
-		this.order = order;
-	}
-	
 	
 
 
@@ -149,11 +126,11 @@ public class VideoBean implements Serializable {
 		this.name = name;
 	}
 
-	public Clob getVideoInfo() {
+	public String getVideoInfo() {
 		return videoInfo;
 	}
 
-	public void setVideoInfo(Clob videoInfo) {
+	public void setVideoInfo(String videoInfo) {
 		this.videoInfo = videoInfo;
 	}
 

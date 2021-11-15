@@ -34,7 +34,7 @@ public class CoachBean implements Serializable {
 	@Column(name = "coach_image")
 	private String coachImage;
 	@Column(name = "coach_info")
-	private Clob coachInfo;
+	private String coachInfo;
 	@Column(name = "skill")
 	private String skill;
 	@Column(name = "account")
@@ -70,25 +70,7 @@ public class CoachBean implements Serializable {
 		this.video = video;
 	}
 
-	public CoachBean(Integer id, String experience, Blob certification, String coachImage, Clob coachInfo, String skill,
-			String account, String pass, String checked, Timestamp checkTime, Timestamp applyTime, String suspension,
-			MemberBean member) {
-		super();
-		this.id = id;
-		this.experience = experience;
-		this.certification = certification;
-		this.coachImage = coachImage;
-		this.coachInfo = coachInfo;
-		this.skill = skill;
-		this.account = account;
-		this.pass = pass;
-		this.checked = checked;
-		this.checkTime = checkTime;
-		this.applyTime = applyTime;
-		this.suspension = suspension;
-		this.member = member;
-	}
-
+	
 
 
 	public Integer getId() {
@@ -123,11 +105,11 @@ public class CoachBean implements Serializable {
 		this.coachImage = coachImage;
 	}
 
-	public Clob getCoachInfo() {
+	public String getCoachInfo() {
 		return coachInfo;
 	}
 
-	public void setCoachInfo(Clob coachInfo) {
+	public void setCoachInfo(String coachInfo) {
 		this.coachInfo = coachInfo;
 	}
 

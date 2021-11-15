@@ -15,6 +15,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import model.MemberBean;
+import model.OrderBean;
 import model.VideoBean;
 import util.HibernateUtils;
 
@@ -43,16 +45,18 @@ public class videoInsert {
 //					cb = new CoachBean();
 					col = row.split(",");
 					
+					
+					
 					vb.setName(col[1]);
-					vb.setVideoInfo(new SerialClob((col[2]).toCharArray()));
+					vb.setVideoInfo(col[2]);
 					vb.setCategory(col[3]);
 					vb.setPartOfBody(col[4]);
-					try {
-						
-						vb.setTime(new Date(format.parse(col[7]).getTime()));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+//					try {
+//						
+//						vb.setTime(new Date(format.parse(col[7]).getTime()));
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
 					vb.setPrice(Integer.parseInt(col[8]));					
 					
 //					vb.setCoach(col[9]);
