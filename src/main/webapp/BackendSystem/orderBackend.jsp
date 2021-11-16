@@ -72,15 +72,15 @@
                         <!-- 訂單項目 -->
 		                  <c:forEach var="entry"  items="${pageBean.orderBean}" > 
 	                        <tr>
-	                          <td>${entry.orderId}</td>
+	                          <td>HGOR-${entry.orderId}</td>
 	                          <td>${entry.member.memberName}</td>
 	                          
 	                          <c:choose>
-	                          	<c:when test="${entry.orderStatus =='付款完成'}">
+	                          	<c:when test="${entry.orderStatus =='付款成功'}">
 	                          		<td>交易成功</td>
 	                          	</c:when>
-	                          	<c:when test="${entry.orderStatus =='交易失敗'}">
-	                          		<td>交易失敗</td>
+	                          	<c:when test="${entry.orderStatus =='付款失敗'}">
+	                          		<td class="text-danger">交易失敗</td>
 	                          	</c:when>
 	                          </c:choose>
 	                          

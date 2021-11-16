@@ -96,7 +96,7 @@
                       <tbody>
                         <c:forEach var="entry"  items="${pageBean.memberBean}" > 
                         <tr>
-                          <td>${entry.memberId}</td>
+                          <td>HGMR-${entry.memberId}</td>
                           <td>${entry.memberName}</td>
                           <td>${entry.email}</td>
                           <td>${entry.phone}</td>

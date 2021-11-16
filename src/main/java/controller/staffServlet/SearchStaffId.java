@@ -14,6 +14,7 @@ import dao.daolmpl.StaffDaoImpl;
 import model.PageBean;
 import service.StaffService;
 import service.serviceimpl.StaffServiceImpl;
+import test.memberInsert;
 
 @WebServlet("/Staff/SearchStaffId.do")
 public class SearchStaffId extends HttpServlet {
@@ -34,16 +35,31 @@ public class SearchStaffId extends HttpServlet {
 			currentpage = Integer.parseInt(curpage);
 		}
 		
-		String inputId = request.getParameter("inputId");
-	
-			String hql =  staffDao.getById(inputId);
-			PageBean pageBean = staffService.findStaffByPage(currentpage, pagesize, hql);
-			request.setAttribute("pageBean", pageBean);
-			RequestDispatcher rd = request.getRequestDispatcher("/BackendSystem/backendAdminister.jsp");
-			rd.forward(request, response);
+		
+		String inputIdB = request.getParameter("inputId").trim();
+		int k = inputIdB.indexOf("-");
+		String inputId = null;
+		
+		String prefixWord ="BDA";
+		
+		if(inputIdB.indexOf(prefixWord)==0) {
+			inputId = inputIdB.substring(k+1);
+			
+		}
+		
+		String hql =  staffDao.getById(inputId);
+		PageBean pageBean = staffService.findStaffByPage(currentpage, pagesize, hql);
+		request.setAttribute("pageBean", pageBean);
+		RequestDispatcher rd = request.getRequestDispatcher("/BackendSystem/backendAdminister.jsp");
+		rd.forward(request, response);
+			
+		
+		
+		return;
+		
+			
 			
 	
-		return;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -42,8 +42,9 @@ public class LoginServlet extends HttpServlet {
 		
 		//讀取使用者輸入
 		String staffIdStr = request.getParameter("staffId");
-//		Integer staffId = Integer.parseInt(staffIdStr.trim());
 		String password = request.getParameter("staffPassword");
+		
+		
 		
 		
 		

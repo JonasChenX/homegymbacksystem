@@ -112,7 +112,7 @@
                         <!-- 員工項目 -->
                         <c:forEach var="staff"  items="${pageBean.staffBean}" > 
 	                       <tr>
-	                         <td>${staff.staffId}</td>
+	                         <td>BDA-${staff.staffId}</td>
 	                         <td>${staff.staffName}</td>
 	                         <td>${staff.staffPosition}</td>
 	                         <td>${staff.staffPhone}</td>

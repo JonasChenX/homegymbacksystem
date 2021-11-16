@@ -114,7 +114,7 @@
 		                              <!-- 表格項目動態新增 -->
 		                              <tr class="align-middle">
 		                                <th scope="row ">${entry.name}</th>
-		                                <td>${entry.videoId}</td>
+		                                <td>HGCS-${entry.videoId}</td>
 		                                <td>${entry.partOfBody}</td>
 		                                <td>${entry.coach.member.memberName}</td>
 		                                <td>${entry.price}</td>
