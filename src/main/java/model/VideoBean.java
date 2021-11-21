@@ -36,12 +36,12 @@ public class VideoBean implements Serializable {
 	private String category; //課程類別
 	@Column(name = "part_of_body")
 	private String partOfBody; //不確定會用數字還是字串來設定  //運動部位
-	@Column(name = "course_image")
+	@Column(name = "course_image",columnDefinition = "LONGTEXT")
 	private String videoImage;	//影片圖片
 	@Column(name = "mime_type")
 	private String mimeType;   // /dmot/src/main/java/_03_listBooks/service/impl/BookServiceImpl.java
 	@Column(name = "upload_time")
-	private Date time;	//上傳時間
+	private String time;	//上傳時間
 	@Column(name = "price")
 	private Integer price; //Integer or Double 	//課程價格
 //	@Column(name = "")
@@ -55,7 +55,7 @@ public class VideoBean implements Serializable {
 	@Column(name = "checked")
 	private	Integer checked; //審核狀態（未審核/已審核）
 	@Column(name = "check_time")
-	private Date checktime;
+	private String checktime;
 	@Column(name = "course_path")
 	private String videoPath;
 	
@@ -166,13 +166,23 @@ public class VideoBean implements Serializable {
 		this.mimeType = mimeType;
 	}
 
-	public Date getTime() {
+	
+
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Date time) {
+
+
+
+
+	public void setTime(String time) {
 		this.time = time;
 	}
+
+
+
+
 
 	public Integer getPrice() {
 		return price;
@@ -214,13 +224,23 @@ public class VideoBean implements Serializable {
 		this.checked = checked;
 	}
 
-	public Date getChecktime() {
+	
+
+	public String getChecktime() {
 		return checktime;
 	}
 
-	public void setChecktime(Date checktime) {
+
+
+
+
+	public void setChecktime(String checktime) {
 		this.checktime = checktime;
 	}
+
+
+
+
 
 	public String getVideoPath() {
 		return videoPath;

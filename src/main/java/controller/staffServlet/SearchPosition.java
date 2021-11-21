@@ -18,35 +18,41 @@ import service.serviceimpl.StaffServiceImpl;
 @WebServlet("/Staff/SearchPosition.do")
 public class SearchPosition extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		StaffService staffService = new StaffServiceImpl();
 		StaffDao staffDao = new StaffDaoImpl();
 		int currentpage = 1;// 默認的當前頁
 		int pagesize = 5;// 每頁顯示的商品數
-		
+		PageBean pageBean = null;
 		String servletPath = request.getServletPath();
 		request.setAttribute("servletPath", servletPath);
 		String curpage = request.getParameter("pageNo");
-		// 為當前頁賦值
-		if (!"".equals(curpage) && curpage != null) {
-			currentpage = Integer.parseInt(curpage);
-		}
-		
 		String inputPosition = request.getParameter("inputPosition");
+		if (inputPosition != null && curpage != null) {
+			currentpage = Integer.parseInt(curpage);
+			String hql = staffDao.getByPosition(inputPosition);
+			pageBean = staffService.findStaffByPage(currentpage, pagesize, hql);
+
+		} else if (inputPosition != null && curpage == null) {
+			String hql = staffDao.getByPosition(inputPosition);
+			pageBean = staffService.findStaffByPage(currentpage, pagesize, hql);
 	
-			String hql =  staffDao.getByPosition(inputPosition);
-			PageBean pageBean = staffService.findStaffByPage(currentpage, pagesize, hql);
-			request.setAttribute("pageBean", pageBean);
-			RequestDispatcher rd = request.getRequestDispatcher("/BackendSystem/backendAdminister.jsp");
-			rd.forward(request, response);
-			
-	
+		} else if (inputPosition == null && curpage != null) {
+			String hql = "From StaffBean";
+			currentpage = Integer.parseInt(curpage);
+			pageBean = staffService.findStaffByPage(currentpage, pagesize, hql);
+		}
+		request.setAttribute("pageBean", pageBean);
+		RequestDispatcher rd = request.getRequestDispatcher("/BackendSystem/backendAdminister.jsp");
+		rd.forward(request, response);
+
 		return;
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

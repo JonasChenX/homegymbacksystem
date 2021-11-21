@@ -28,7 +28,7 @@ public class PassOrNotServlet extends HttpServlet {
 		int pass = Integer.parseInt(request.getParameter("passOrNot"));
 		int pk = Integer.parseInt(request.getParameter("videoId"));
 		Date date = new Date();
-		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		String sqlDate = new java.sql.Date(date.getTime()).toString();
 		ClassService classService = new ClassServiceImpl();
 		classService.passOrNot(pass, checked, pk, sqlDate);
 	

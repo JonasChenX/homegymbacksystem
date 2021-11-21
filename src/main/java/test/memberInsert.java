@@ -3,6 +3,7 @@ package test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,6 +69,13 @@ public class memberInsert {
 				session.persist(m);
 			}
 			
+			
+				
+			//
+			String ts = new java.sql.Timestamp(System.currentTimeMillis()).toString();
+			
+			
+			
 //			
 			try (BufferedReader br = new BufferedReader(new FileReader("coach.csv"))) {
 				int times = 0;
@@ -84,7 +92,7 @@ public class memberInsert {
 						cb.setExperience(col[3]);
 						cb.setCoachInfo(col[7]);
 						cb.setAccount(col[9]);
-						cb.setApplyTime(new java.sql.Timestamp(System.currentTimeMillis()));
+						cb.setApplyTime(ts );
 						cbList.add(cb);
 					}
 					times++;

@@ -42,9 +42,8 @@ public class LoginServlet extends HttpServlet {
 		
 		//讀取使用者輸入
 		String staffIdStr = request.getParameter("staffId");
+//		Integer staffId = Integer.parseInt(staffIdStr.trim());
 		String password = request.getParameter("staffPassword");
-		
-		
 		
 		
 		
@@ -73,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 		
 		StaffBean sb = null;
 		try {
-			sb = staffService.findByMemberIdAndPassword(Integer.parseInt(staffIdStr.trim()), password);
+			sb = staffService.findByMemberIdAndPassword(Integer.parseInt(staffIdStr.trim()), encryptPassword);
 			
 			if(sb.getStaffStatus().equals("已離職")) {
 				errorMsgMap.put("LoginError", "本員工已離職");

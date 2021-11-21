@@ -142,7 +142,7 @@ public class ClassServiceImpl implements ClassService {
 	 }
 
 	@Override
-	public void passOrNot(int pass, int checked, int pk,Date sqlDate) {
+	public void passOrNot(int pass, int checked, int pk,String sqlDate) {
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {

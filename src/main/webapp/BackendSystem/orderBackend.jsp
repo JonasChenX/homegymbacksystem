@@ -47,9 +47,10 @@
 	                     <div class="col-4">
 	                        <div class="d-flex">
 	                          <div class="col-auto">
-	                            <label for="inputOrderId" class="col-form-label me-2">訂單編號</label>
+	                            <label for="inputOrderId" class="col-form-label me-2">訂單查詢</label>
 	                          </div>
-	                          <input class="form-control me-2" id="inputOrderId" type="text" placeholder="Search" aria-label="Search" name="inputValue">
+	                          <input class="form-control me-2" id="inputOrderId" type="text" 
+	                          		placeholder="請搜尋訂單編號或會員名稱" aria-label="Search" name="inputValue" value="${param.inputValue }">
 	                          <button class="btn btn-outline-primary col-auto" type="submit">查詢</button>
 	                        </div>
 	                     </div>
@@ -72,7 +73,7 @@
                         <!-- 訂單項目 -->
 		                  <c:forEach var="entry"  items="${pageBean.orderBean}" > 
 	                        <tr>
-	                          <td>HGOR-${entry.orderId}</td>
+	                          <td>${entry.orderId}</td>
 	                          <td>${entry.member.memberName}</td>
 	                          
 	                          <c:choose>
@@ -80,11 +81,11 @@
 	                          		<td>交易成功</td>
 	                          	</c:when>
 	                          	<c:when test="${entry.orderStatus =='付款失敗'}">
-	                          		<td class="text-danger">交易失敗</td>
+	                          		<td>交易失敗</td>
 	                          	</c:when>
 	                          </c:choose>
 	                          
-	                          <td><fmt:formatDate value="${entry.orderTime}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
+	                          <td>${entry.orderTime}</td>
 	                          <td><div class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#orderContent${entry.orderId}">訂單內容</div></td>
 	                        </tr>
                           </c:forEach>
@@ -93,60 +94,69 @@
                       </tbody>
                     </table>
                     <!-- 分頁 -->
-                    <nav class="d-flex justify-content-center mt-3 mb-3">
+                    		<!-- 左側 -->
+                    		<nav class="d-flex justify-content-center mt-3 mb-3">
                           <ul class="pagination">
                            <li class="page-item">
 						        <c:if test="${pageBean.currentPage > 1}">
 						        <c:choose>
-						        	<c:when  test="${!empty param.partOfBody || !empty param.status}">
-							          <a class="page-link" href="<c:url value='${servletPath}?status=${param.status}&partOfBody=${param.partOfBody}&pageNo=${pageBean.currentPage-1}' />" aria-label="Previous"> 
-							          	<span aria-hidden="true">&laquo;</span>
-							          </a>
-						          </c:when>
-						          <c:when  test="${!empty param.inputValue || !empty param.checked}">
-							          <a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&checked=${param.checked}&pageNo=${pageBean.currentPage-1}' />" aria-label="Previous"> 
-							          	<span aria-hidden="true">&laquo;</span>
+						        	<c:when  test="${!empty param.inputValue}">
+							          <a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&pageNo=${pageBean.currentPage-1}' />" 
+							          aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							          </a>
 						          </c:when>
 						        	<c:otherwise>
-							          <a class="page-link" href="<c:url value='${servletPath}?pageNo=${pageBean.currentPage-1}' />" aria-label="Previous"> 
-							          	<span aria-hidden="true">&laquo;</span>
+							          <a class="page-link" href="<c:url value='${servletPath}?pageNo=${pageBean.currentPage-1}' />" 
+							          	aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							          </a>
 						          	</c:otherwise>
 						        </c:choose> 
 						        
 						         </c:if>
 						         </li>
+						         <!-- 中間值 -->
 						       	<c:if test="${pageBean.totalPage > 1}">
-						       		<c:forEach var="page"  begin="1" end="${pageBean.totalPage}" step="1" >                  
+						       		<c:forEach var="page"  begin="1" end="${pageBean.totalPage}" 
+						       		step="1" >  
+						       		<!-- 當前頁數反藍 -->
+						       		<c:if test="${ pageBean.currentPage == page}">
+										<li class="page-item active">
 						        		<c:choose>
-						        			<c:when  test="${!empty param.partOfBody || !empty param.status}">
-						        				<li class="page-item">
-						        				<a class="page-link" href="<c:url value='${servletPath}?status=${param.status}&partOfBody=${param.partOfBody}&partOfBody=${param.partOfBody}&pageNo=${page}'/>">${page}</a>
-						        				</li>
-						        			</c:when>
 						        			<c:when  test="${!empty param.inputValue}">
-						        				<li class="page-item">
-						        				<a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&checked=${param.checked}&pageNo=${page}'/>">${page}</a>
-						        				</li>
+						    
+						        				<a class="page-link" 
+						        					href="<c:url value='${servletPath}?inputValue=${param.inputValue}&pageNo=${page}'/>">${page}</a>
+						
 						        			</c:when>
 						        			<c:otherwise>
-						        				<li class="page-item">
-						        				<a class="page-link" href="<c:url value='${servletPath}?pageNo=${page}'/>">${page}</a>
-						        				</li>
+						        				<a class="page-link"
+														href="<c:url value='${servletPath}?pageNo=${page}'/>">${page}</a>
 						        			</c:otherwise>
 						        		</c:choose> 
+						        		</li></c:if>
+						        		<c:if test="${ pageBean.currentPage != page}">
+										<li class="page-item">
+											<c:choose>
+						        			<c:when  test="${!empty param.inputValue}">
+						    
+						        				<a class="page-link" 
+						        					href="<c:url value='${servletPath}?inputValue=${param.inputValue}&pageNo=${page}'/>">${page}</a>
+						
+						        			</c:when>
+						        			<c:otherwise>
+						        				<a class="page-link"
+														href="<c:url value='${servletPath}?pageNo=${page}'/>">${page}</a>
+						        			</c:otherwise>
+						        		</c:choose> 
+										</li></c:if>
+										
+										
 						        	</c:forEach>
 						     	</c:if>
 						
 						        <li class="page-item">
 						         	<c:if test="${pageBean.currentPage != pageBean.totalPage && pageBean.totalPage != 0}">
 						         	<c:choose>
-						        		<c:when  test="${!empty param.partOfBody || !empty param.status}">
-						         			<a class="page-link" href="<c:url value='${servletPath}?status=${param.status}&partOfBody=${param.partOfBody}&pageNo=${pageBean.currentPage+1}' />" aria-label="Next">
-						         			<span aria-hidden="true">&raquo;</span>
-						          			</a>
-						          		</c:when>
 						          		<c:when  test="${!empty param.inputValue}">
 						         			<a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&checked=${param.checked}&pageNo=${pageBean.currentPage+1}' />" aria-label="Next">
 						         			<span aria-hidden="true">&raquo;</span>
@@ -157,9 +167,15 @@
 						         			<span aria-hidden="true">&raquo;</span>
 						          			</a>
 						          		</c:otherwise>
+						          		
 						        	</c:choose> 
+						        	
 						         	</c:if>
 						        </li>
+						        <!-- 反藍的部分 -->
+						        
+								
+						        
                           </ul>
                     </nav>
               </div>
@@ -186,7 +202,7 @@
 		            <li class="list-group-item">
 		              <div class="row align-items-center">
 		                <div class="col-4">
-		                  <img class="w-100" src="https://fakeimg.pl/1280x720/" alt="">
+		                  <img class="w-100" src="${course.videoImage} " alt="">
 		                </div>
 		                <div class="col-8">
 		                  <p class="m-0">${course.name}</p>

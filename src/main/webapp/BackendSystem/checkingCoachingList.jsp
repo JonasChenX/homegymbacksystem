@@ -118,18 +118,18 @@
                         </tbody>
                       </table>
                     <!-- 分頁 -->
-                   	<nav class="d-flex justify-content-center mt-3 mb-3">
+                    		<nav class="d-flex justify-content-center mt-3 mb-3">
                           <ul class="pagination">
                            <li class="page-item">
 						        <c:if test="${pageBean.currentPage > 1}">
 						        <c:choose>
-						        	<c:when  test="${!empty param.inputEmail}">
-							          <a class="page-link" href="<c:url value='${servletPath}?status=${param.inputEmail}&pageNo=${pageBean.currentPage-1}' />" aria-label="Previous"> 
+						        	<c:when  test="${!empty param.inputValue}">
+							          <a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&checked=${param.checked}&&pageNo=${pageBean.currentPage-1}' />" aria-label="Previous"> 
 							          	<span aria-hidden="true">&laquo;</span>
 							          </a>
 						          </c:when>
-						          <c:when  test="${!empty param.inputValue || !empty param.checked}">
-							          <a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&checked=${param.checked}&pageNo=${pageBean.currentPage-1}' />" aria-label="Previous"> 
+						          <c:when  test="${!empty param.role}">
+							          <a class="page-link" href="<c:url value='${servletPath}?role=${param.role}&pageNo=${pageBean.currentPage-1}' />" aria-label="Previous"> 
 							          	<span aria-hidden="true">&laquo;</span>
 							          </a>
 						          </c:when>
@@ -145,20 +145,30 @@
 						       	<c:if test="${pageBean.totalPage > 1}">
 						       		<c:forEach var="page"  begin="1" end="${pageBean.totalPage}" step="1" >                  
 						        		<c:choose>
-						        			<c:when  test="${!empty param.inputEmail}">
-						        				<li class="page-item">
-						        				<a class="page-link" href="<c:url value='${servletPath}?inputEmail=${param.inputEmail}&pageNo=${page}'/>">${page}</a>
-						        				</li>
-						        			</c:when>
 						        			<c:when  test="${!empty param.inputValue}">
 						        				<li class="page-item">
-						        				<a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&checked=${param.checked}&pageNo=${page}'/>">${page}</a>
+						        				<a class="page-link" href="<c:url value='${servletPath}?inputValue=${param.inputValue}&checked=${param.checked}&&pageNo=${page}'/>">${page}</a>
+						        				</li>
+						        			</c:when>
+						        			<c:when  test="${!empty param.role}">
+						        				<li class="page-item">
+						        				<a class="page-link" href="<c:url value='${servletPath}?role=${param.role}&pageNo=${page}'/>">${page}</a>
 						        				</li>
 						        			</c:when>
 						        			<c:otherwise>
-						        				<li class="page-item">
-						        				<a class="page-link" href="<c:url value='${servletPath}?pageNo=${page}'/>">${page}</a>
-						        				</li>
+						        			<!-- 將當前頁數反藍 -->
+						        				
+						        				<c:if test="${ pageBean.currentPage == page}">
+							        					<li class="page-item active">
+								        					<a class="page-link " href="<c:url value='${servletPath}?pageNo=${page}'/>">${page}</a>
+								        				</li>
+							        				</c:if>
+							        				<c:if test="${ pageBean.currentPage != page}">
+									        			<li class="page-item">
+									        				<a class="page-link " href="<c:url value='${servletPath}?pageNo=${page}'/>">${page}</a>
+									        			</li>
+								        			</c:if>
+						        				<!-- /將當前頁數反藍 -->
 						        			</c:otherwise>
 						        		</c:choose> 
 						        	</c:forEach>
@@ -167,8 +177,8 @@
 						        <li class="page-item">
 						         	<c:if test="${pageBean.currentPage != pageBean.totalPage && pageBean.totalPage != 0}">
 						         	<c:choose>
-						        		<c:when  test="${!empty param.inputEmail}">
-						         			<a class="page-link" href="<c:url value='${servletPath}?inputEmail=${param.inputEmail}&pageNo=${pageBean.currentPage+1}' />" aria-label="Next">
+						        		<c:when  test="${!empty param.role}">
+						         			<a class="page-link" href="<c:url value='${servletPath}?role=${param.role}&pageNo=${pageBean.currentPage+1}' />" aria-label="Next">
 						         			<span aria-hidden="true">&raquo;</span>
 						          			</a>
 						          		</c:when>
@@ -186,7 +196,7 @@
 						         	</c:if>
 						        </li>
                           </ul>
-                      </nav>
+                    </nav>
                   </div>
                 </div>
             </div>

@@ -37,8 +37,8 @@ public class orderInsert {
 					ob = new OrderBean();
 					col = row.split(",");
 					
-//					int orderId = Integer.parseInt(col[0]);
-//					ob.setOrderId(orderId);
+					String orderId = col[0];
+					ob.setOrderId(orderId);
 					
 //					ob.setOrderTime(new java.sql.Timestamp(System.currentTimeMillis()));
 					

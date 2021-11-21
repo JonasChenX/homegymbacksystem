@@ -24,11 +24,11 @@ public class OrderBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "order_id")
-	Integer orderId;
+	String orderId;
 	@Column(name = "order_time")
-	Date orderTime;
+	String orderTime;
 	@Column(name = "total_amt")
 	Integer totalAmt;
 	@Column(name = "order_status")
@@ -102,19 +102,23 @@ public class OrderBean implements Serializable {
 		this.member = member;
 	}
 
-	public Integer getOrderId() {
+	
+
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 
-	public Date getOrderTime() {
+
+	public String getOrderTime() {
 		return orderTime;
 	}
 
-	public void setOrderTime(Date orderTime) {
+	public void setOrderTime(String orderTime) {
 		this.orderTime = orderTime;
 	}
 
