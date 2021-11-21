@@ -101,7 +101,13 @@
                           <td>${entry.memberName}</td>
                           <td>${entry.email}</td>
                           <td>${entry.phone}</td>
-                          <td>${entry.role}</td>
+                          <c:if test="${entry.role =='ROLE_MEMBER'}">
+	                          <td>會員</td>
+                          </c:if>
+                          <c:if test="${entry.role == 'ROLE_COACH'}">
+	                          <td>教練</td>
+                          </c:if>
+                          
                           <td>${entry.birthday}</td>
                           <td><div class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#showPhoto">預覽</div></td>
                           <td>
