@@ -89,6 +89,7 @@
                           <th scope="col">會員信箱</th>
                           <th scope="col">會員電話</th>
                           <th scope="col">會員身份</th>
+                          <th scope="col">會員狀態</th>
                           <th scope="col">會員生日</th>
                           <th scope="col">會員大頭照 </th>
                           <th scope="col">教練資料 </th>
@@ -107,7 +108,13 @@
                           <c:if test="${entry.role == 'ROLE_COACH'}">
 	                          <td>教練</td>
                           </c:if>
-                          
+                          <c:if test="${entry.status == 1}">
+	                          <td>已驗證</td>
+                          </c:if>
+                          <c:if test="${entry.status == 0}">
+	                          <td class="text-danger">未驗證</td>
+                          </c:if>
+                       	
                           <td>${entry.birthday}</td>
                           <td><div class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#showPhoto${entry.memberId}">預覽</div></td>
                           <td>

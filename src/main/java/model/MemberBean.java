@@ -51,7 +51,7 @@ public class MemberBean implements Serializable {
 	private String code;
 	@Column(name = "mine_type")
 	private String minetype;
-	
+		
 	@Transient
 	private String image;
 	
