@@ -20,7 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="member")
+@Table(name="`member`")
 public class MemberBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
