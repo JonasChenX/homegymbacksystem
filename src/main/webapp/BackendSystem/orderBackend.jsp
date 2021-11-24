@@ -80,9 +80,9 @@
 	                          	<c:when test="${entry.orderStatus =='付款成功'}">
 	                          		<td>交易成功</td>
 	                          	</c:when>
-	                          	<c:when test="${entry.orderStatus =='付款失敗'}">
+	                          	<c:otherwise>
 	                          		<td>交易失敗</td>
-	                          	</c:when>
+	                          	</c:otherwise>
 	                          </c:choose>
 	                          
 	                          <td>${entry.orderTime}</td>

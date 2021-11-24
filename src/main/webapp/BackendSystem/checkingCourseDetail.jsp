@@ -51,7 +51,7 @@
                         <div class="row align-items-center">
                             <div class="col-5">
                                 <div class="mb-3 ms-4">
-                                    <video class="w-100" src="/homegymbackendsystem//BackendSystem${VideoBean.videoPath}" controls></video>
+                                    <video class="w-100" src="${VideoBean.videoPath}" controls></video>
                                 </div>
                             </div>
                             <div class="col-7">
